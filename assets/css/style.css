@@ -1,0 +1,139 @@
+body {
+    font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
+    background-color: lightgray;
+    font-color: #777777;
+}
+
+h1 { 
+    font-family: 'Georgia', Times, Times New Roman, serif; 
+}
+
+header {
+    height: 100%;
+    background-color: teal;
+    padding: 10px;
+    color: white;
+}
+
+
+h1#maincontentheader {
+    color: teal;
+    padding: 25px;
+}
+
+form { padding: 25px;}
+
+fieldset { border: none;}
+
+input { width: 100%; 
+        margin-bottom: 25px;
+        height: 25px;
+         }
+
+input[type=submit] {
+    background-color: teal;
+    color: white;
+    font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
+    font-size: medium;
+    width: 25%;
+    height: 50px;
+    margin-top: 5px;
+}
+
+#gallerycontainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.galleryitem {
+    height: 200;
+    width: 200;
+}
+
+textarea { 
+    width: 100%;
+}
+
+hr {
+    width: 95%;
+}
+
+div#maincontent {
+    background-color: white;
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+header{ 
+    margin-left: 15%;
+}
+
+p { 
+    text-indent: 5%;
+    padding: 10px;
+}
+
+a.menu { 
+    color: black;
+    padding: 10px;
+    text-decoration: none;
+}
+
+a.menu:hover { 
+    background-color: teal;
+    color: white;
+    text-decoration: none;
+    transition: 1s;
+}
+
+p::first-letter { font-weight: bold; }
+
+li#portfolio { 
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
+ }
+
+div#main {
+    position: relative;
+    height: 95vh;
+    margin: auto;
+    margin-bottom: 30px;
+}
+
+div#top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    position: absolute;
+    width: 100%;
+}
+
+nav {
+    margin-right: 15%;
+}
+
+li {
+    display: inline;
+    list-style-type: none;
+}
+
+img {
+    float: left;
+    background-color: gray;
+    margin: 10px;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    border-top: 5px solid teal;
+    width: 100%;
+    background-color: #666666;
+    color: white;
+    padding: 20px;
+}

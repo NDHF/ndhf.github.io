@@ -1,0 +1,60 @@
+<!doctype html>
+
+<html>
+
+<head>
+    <title>My Profile</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <div id="main">
+
+        <div id="top">
+
+            <header>
+                <h1 id="name">Nicholas Bernhard</h1>
+            </header>
+
+            <nav>
+                <ul>
+                    <li><a class="menu" href="index.html">About</a></li>
+                    <li id="portfolio"><a class="menu" href="portfolio.html">Portfolio</a></li>
+                    <li><a class="menu" href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <div id="maincontent">
+            <h1 id="maincontentheader">Portfolio</h1>
+
+            <hr>
+
+            <div id="gallerycontainer">
+
+            </div>
+
+        </div>
+
+        <footer>&copy; 2018 NDH Ltd.</footer>
+
+    </div>
+
+    <script>
+        for (i = 1; i <= 10; i++) {
+            document.getElementById("gallerycontainer").innerHTML += 
+            "<div class='galleryitem'><img src='assets/images/" + i + ".jpg' title='" + i + "alt='[i]'></div>"
+        } 
+    </script>
+
+</body>
+
+</html>
