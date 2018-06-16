@@ -1,0 +1,101 @@
+<!doctype html>
+
+<html>
+
+<head>
+    <title>Star Wars RPG</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+</head>
+
+<body>
+
+<div id="gameContent">
+
+<div id="stats"></div>
+
+<div id="characterRoster">
+
+    <h1 id="characterRosterHeading" class="center">Choose Your Character</h1>
+
+    <div id="characterSelect">
+
+        <div id="luke" class="roster character">
+            <div class="characterPicDiv">
+                <img id="lukeImage" class="characterPic" src="" alt="Luke" title="character pic">
+            </div>
+            <div class="hpStatsDiv">
+            <p class="hpStats" id="lukeHP"></p>
+            </div>
+        </div>
+
+        <div id="obiWan" class="roster character">
+                <div class="characterPicDiv">
+                    <img id="obiWanImage" class="characterPic" src="" alt="Obi-Wan" title="character pic">
+                </div>
+                <div class="hpStatsDiv">
+                    <p class="hpStats" id="obiWanHP"></p>
+                </div>
+        </div>
+
+        <div id="sidious" class="roster character">
+                <div class="characterPicDiv">
+                    <img id="sidiousImage" class="characterPic" src="" alt="Darth Sidious" title="character pic">
+                </div>
+                <div class="hpStatsDiv">
+                    <p class="hpStats" id="sidiousHP"></p>
+                </div>
+        </div>
+
+        <div id="maul" class="roster character">
+                <div class="characterPicDiv">
+                    <img id="darthMaul" class="characterPic" src="" alt="Darth Maul" title="character pic">
+                </div>
+                <div class="hpStatsDiv">
+                    <p class="hpStats" id="maulHP"></p>
+                </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div id="yourCharacter">
+    <h1 id="yourCharacterHeading" class="center">Your Character</h1>
+    <div id="yourCharacterDiv"></div>
+</div>
+
+<div id="enemies">
+        <h1 id="enemyHeading" class="center">Enemy</h1>
+        <div id="enemySelect"></div>
+</div>
+
+<div id="combatDiv">
+
+    <h1 id="attackSectionHeading">Attack Section</h1>
+
+<div id="fightSection">
+    <h1 id="fightSectionHeading">Fight Section</h1>
+    <input type="button" id="combatButton" value="ATTACK!" name="attack">
+</div>
+
+<div id="defender">
+    <h1 id="defenderHeading">Defender</h1>
+    <div id="defenderDiv"></div>
+</div>
+
+<p id="playerAttack"></p>
+<p id="enemyAttack"></p>
+<input type="button" id="playAgain" value="PLAY AGAIN, PADAWAN?" name="reload" onclick="loadGame()">
+
+</div>
+
+</div>
+
+<div id="scriptTags">
+        <script src="assets/javascript/game.js"></script>
+</div>
+
+</body>
+
+</html>
