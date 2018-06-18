@@ -13,3 +13,6 @@
 8. To win the game, the player must find the correct order for fighting enemies, building up their attack power sufficiently to defeat enemies with
 larger counterattacks. 
 9. The order for fighting enemies will be different for each player. 
+10. CREDITS:
+    a. 
+    b. Music: "Space 1990-B" Kevin MacLeod (incompetech.com) Licensed under Creative Commons: By Attribution 3.0 License http://creativecommons.org/licenses/by/3.0/

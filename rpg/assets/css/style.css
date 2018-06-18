@@ -1,5 +1,20 @@
 body {
     background-color: lightblue;
+        background-image: url(../images/background.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-attachment: fixed;
+        font-family: 'Space Mono';font-size: 22px;
+
+    }
+
+p {
+    color: white;
+}
+
+h1 {
+    color: white;
 }
 
 div#stats {
@@ -9,6 +24,8 @@ div#stats {
     padding-left: 10px;
     padding-top: 10px;
     font-family: Georgia, 'Times New Roman', Times, serif;
+    color: white;
+    font-family: 'Space Mono';font-size: 22px;
 }
 
 div#characterSelect {

@@ -96,7 +96,7 @@ $("#combatButton").on("click", function() {
         var darthMaulAttack = darthMaulBaseAttackPower * attackMultiplier;
 
         var lukeCounterattack = 5;
-        var obiWanCounterattack = 11;
+        var obiWanCounterattack = 8;
         var darthSidiousCounterattack = 20;
         var darthMaulCounterattack = 25;
 
@@ -216,7 +216,6 @@ $("#combatButton").on("click", function() {
             $("#sidiousHP").html(darthSidiousHP);
             darthMaulHP = 103;
             $("#maulHP").html(darthMaulHP);
-            attackMultiplier = 0;
 
             //Remove enemy from its div
             // $("#defenderDiv").children().remove();
