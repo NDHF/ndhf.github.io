@@ -19,7 +19,18 @@ var coordinateArray = [{
     name: "denverUnionStation",
     xCoordinate: 39.75,
     yCoordinate: -105.00
-}];
+}, 
+{
+    name: "policeStation",
+    xCoordinate: 39.68,
+    yCoordinate: -104.96
+},
+{
+    name: "chamberlinObservatory",
+    xCoordinate: 39.67,
+    yCoordinate: -104.96,
+}
+];
 
 function getLocation() {
 
