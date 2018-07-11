@@ -3,7 +3,6 @@ $(document).on("click", "#submitButton", function () {
 
             //Key for the Google API:
             // var APIKey = "AIzaSyB-cP9CrYbHOtYNDY2_aNHIzDjR3DvHjwE";
-            var APIKey = "AIzaSyA2GXRBVF0n37yyjTzdwmrk5VnlAQCh7uM";
 
 
             //Declaring the Giphy API's query URL as a variable, incorporating our API key and search term
