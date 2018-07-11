@@ -38,6 +38,8 @@ birthdayArray = [];
 
 matchingBirthdays = [];
 
+var dataRef = firebase.database();
+
 dataRef.ref().on("child_added", function (childSnapshot) {
 
     birthdayArray.push(childSnapshot.val().birthday);
