@@ -15,10 +15,6 @@ $(document).on("click", "#submitButton", function () {
 
 });
 
-var x;
-
-var y;
-
 var coordinateArray = [{
     name: "denverUnionStation",
     xCoordinate: 39.75,
@@ -36,9 +32,6 @@ function getLocation() {
 }
 
 function showPosition(position) {
-    x = position.coords.longitude;
-    y = position.coords.latitude;
-    console.log(typeof x);
     $("#location").html("Latitude: " + "<span id='xPos'>" + position.coords.latitude + "</span>" +
         "<br>Longitude: " + "<span id='yPos'>" + position.coords.longitude + "</span>");
     console.log("test");
@@ -54,6 +47,8 @@ console.log("newY is " + newY);
 var oldY;
 
 function newValues() {
+
+    $("#direction").html("");
 
     oldX = newX;
     console.log("oldX is " + oldX);
