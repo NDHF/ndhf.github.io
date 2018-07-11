@@ -39,8 +39,8 @@ function showPosition(position) {
     x = position.coords.longitude;
     y = position.coords.latitude;
     console.log(typeof x);
-    $("#location").html("Latitude: " + "<span id='xPos'>" + position.coords.latitude.toFixed(3) + "</span>" +
-        "<br>Longitude: " + "<span id='yPos'>" + position.coords.longitude.toFixed(3) + "</span>");
+    $("#location").html("Latitude: " + "<span id='xPos'>" + position.coords.latitude + "</span>" +
+        "<br>Longitude: " + "<span id='yPos'>" + position.coords.longitude + "</span>");
     console.log("test");
 };
 
