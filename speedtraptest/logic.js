@@ -72,7 +72,7 @@ $("#playAlert").on("click", function () {
 });
 
 
-setInterval(newValues, 60000);
+setInterval(newValues, 10000);
 
 //oldX is the x-coordinate from an old position, newX is the updated value. Ditto for oldY and newY
 function direction() {
@@ -101,6 +101,8 @@ function direction() {
     } else if ((newX < oldX) && (newY > oldY)) {
         direction = "northwest";
         $("#direction").html(direction);
+    } else {
+        $("#direction").html("Position has not changed");
     }
 }
 
