@@ -39,24 +39,30 @@ function showPosition(position) {
     x = position.coords.longitude;
     y = position.coords.latitude;
     console.log(typeof x);
-    $("#location").html("Latitude: " + "<span id='xPos'>" + x + "</span>" +
-        "<br>Longitude: " + "<span id='yPos'>" + y + "</span>");
+    $("#location").html("Latitude: " + "<span id='xPos'>" + position.coords.latitude.toFixed(3) + "</span>" +
+        "<br>Longitude: " + "<span id='yPos'>" + position.coords.longitude.toFixed(3) + "</span>");
     console.log("test");
 };
 
 getLocation();
 
-var newX = $("#xPos");
+var newX = $("#xPos").html();
+console.log("newX is " + newX);
 var oldX;
-var newY = $("#yPos");
+var newY = $("#yPos").html();
+console.log("newY is " + newY);
 var oldY;
 
 function newValues() {
 
     oldX = newX;
-    newX = $("#xPos")
+    console.log("oldX is " + oldX);
+    newX = $("#xPos").html();
+    console.log("newX is " + newX);
     oldY = newY;
-    newY = $("#yPos")
+    console.log("oldY is " + oldY);
+    newY = $("#yPos").html();
+    console.log("newY is " + newY);
 
     direction();
     proximityCheck();
