@@ -59,9 +59,6 @@ function newValues() {
     newY = $("#yPos").html();
     console.log("newY is " + newY);
 
-    direction();
-    proximityCheck();
-
 };
 
 var alertSound = new Audio('assets/audio/richEvansLaugh01.mp3');
@@ -73,37 +70,46 @@ $("#playAlert").on("click", function () {
 });
 
 
-setInterval(newValues, 10000);
 
 //oldX is the x-coordinate from an old position, newX is the updated value. Ditto for oldY and newY
-function direction() {
+function currentDirection() {
 
     if ((newX > oldX) && (newY === oldY)) {
         direction = "east";
         $("#direction").html(direction);
+        console.log(direction);
     } else if ((newX < oldX) && (newY === oldY)) {
         direction = "west";
         $("#direction").html(direction);
+        console.log(direction);
     } else if ((newX === oldX) && (newY > oldY)) {
         direction = "north";
         $("#direction").html(direction);
+        console.log(direction);
     } else if ((newX === oldX) && (newY < oldY)) {
         direction = "south";
         $("#direction").html(direction);
+        console.log(direction);
     } else if ((newX > oldX) && (newY > oldY)) {
         direction = "northeast";
         $("#direction").html(direction);
+        console.log(direction);
     } else if ((newX > oldX) && (newY < oldY)) {
         direction = "southeast";
         $("#direction").html(direction);
+        console.log(direction);
     } else if ((newX < oldX) && (newY < oldY)) {
         direction = "southwest";
         $("#direction").html(direction);
+        console.log(direction);
     } else if ((newX < oldX) && (newY > oldY)) {
         direction = "northwest";
         $("#direction").html(direction);
+        console.log(direction);
     } else {
-        $("#direction").html("Position has not changed");
+        direction = "Position has not changed"
+        $("#direction").html(direction);
+        console.log(direction);
     }
 }
 
@@ -135,3 +141,9 @@ function proximityCheck() {
 
     }
 }
+
+setInterval(function () {
+    newValues();
+    currentDirection();
+    proximityCheck();
+}, 10000);
