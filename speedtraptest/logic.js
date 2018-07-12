@@ -15,7 +15,13 @@ $(document).on("click", "#submitButton", function () {
 
 });
 
-var coordinateArray = [{
+var coordinateArray = [
+{
+    name: "westminsterStation",
+    xCoordinate: 39.82,
+    yCoordinate: -105.02
+},    
+{
     name: "denverUnionStation",
     xCoordinate: 39.75,
     yCoordinate: -105.00
@@ -28,7 +34,12 @@ var coordinateArray = [{
 {
     name: "chamberlinObservatory",
     xCoordinate: 39.67,
-    yCoordinate: -104.96,
+    yCoordinate: -104.96
+},
+{
+    name: "104th84th",
+    xCoordinate: 39.846732,
+    yCoordinate: -104.984662
 }
 ];
 
@@ -42,9 +53,13 @@ function getLocation() {
     }
 }
 
+//The app has a minimum driving speed to function. This minimum speed is defined by the precision of coordinate measurement, and how many times the 
+//function is called. 
+//With map coordinates, the third decimal point measures a distance of 0.068 miles.
+//The functions are called every ten seconds. Therefore, the user must be traveling at least 0.068 miles every ten seconds, or about 24 miles per hour. 
 function showPosition(position) {
-    $("#location").html("Latitude: " + "<span id='xPos'>" + position.coords.latitude + "</span>" +
-        "<br>Longitude: " + "<span id='yPos'>" + position.coords.longitude + "</span>");
+    $("#location").html("Latitude: " + "<span id='xPos'>" + position.coords.latitude.toFixed(3) + "</span>" +
+        "<br>Longitude: " + "<span id='yPos'>" + position.coords.longitude.toFixed(3) + "</span>");
     console.log("test");
 };
 
@@ -72,13 +87,37 @@ function newValues() {
 
 };
 
-var alertSound = new Audio('assets/audio/richEvansLaugh01.mp3');
+//Alert sound is pup_alert by willy_ineedthatapp_com https://freesound.org/people/willy_ineedthatapp_com/sounds/167337/, licensed under Creative Commons 0
+var alertSound = new Audio('assets/audio/167337__willy-ineedthatapp-com__pup-alert.mp3');
 
 $("#playAlert").on("click", function () {
 
-    alertSound.play();
+    alert();
 
 });
+
+//This code is used to 'snooze' the proximity alert, by checking the value of a counter variable
+
+    var counter = 0;
+    console.log("counter value is: " + counter);
+
+    function resetCounter() {
+        counter = 0;
+        console.log("resetCounter has been called");
+    };
+
+    function alert() {
+        if (counter === 0) {
+                counter = 1;
+                console.log("Counter value is now: " + counter);
+                alertSound.play();
+                console.log("Alert sound has been played");
+                setTimeout(resetCounter, 60000);
+                console.log("Counter reset timer has been set");
+            } else if (counter === 1) {
+                console.log("Alert is on snooze");
+            }
+    };
 
 
 
@@ -133,21 +172,21 @@ function proximityCheck() {
     for (i = 0; i <= coordinateArray.length; i++) {
 
         if ((direction === "north") && ((newY < coordinateArray[i].yCoordinate) && (newY > (coordinateArray[i].yCoordinate - 0.01))) && (newX === coordinateArray[i].xCoordinate)) {
-            alertSound.play();
+            alert();
         } else if ((direction === "south") && ((newY > coordinateArray[i].yCoordinate) && (newY < (coordinateArray[i].yCoordinate + 0.01))) && (newX === coordinateArray[i].xCoordinate)) {
-            alertSound.play();
+            alert();
         } else if ((direction === "west") && ((newX > coordinateArray[i].xCoordinate) && (newX < (coordinateArray[i].xCoordinate + 0.01))) && (newX === coordinateArray[i].xCoordinate)) {
-            alertSound.play();
+            alert();
         } else if ((direction === "east") && ((newX < coordinateArray[i].xCoordinate) && (newX > (coordinateArray[i].xCoordinate - 0.01))) && (newY === coordinateArray[i].yCoordinate)) {
-            alertSound.play();
+            alert();
         } else if ((direction === "northeast") && ((newY < coordinateArray[i].yCoordinate) && (newY > (coordinateArray[i].yCoordinate - 0.01))) && ((newX < coordinateArray[i].xCoordinate) && (newX > (coordinateArray[i].xCoordinate - 0.01)))) {
-            alertSound.play();
+            alert();
         } else if ((direction === "southeast") && ((newY > coordinateArray[i].yCoordinate) && (newY < (coordinateArray[i].yCoordinate + 0.01))) && ((newX < coordinateArray[i].xCoordinate) && (newX > (coordinateArray[i].xCoordinate - 0.01)))) {
-            alertSound.play();
+            alert();
         } else if ((direction === "southwest") && ((newY > coordinateArray[i].yCoordinate) && (newY < (coordinateArray[i].yCoordinate + 0.01))) && ((newX > coordinateArray[i].xCoordinate) && (newX < (coordinateArray[i].xCoordinate + 0.01)))) {
-            alertSound.play();
+            alert();
         } else if ((direction === "northwest") && ((newY < coordinateArray[i].yCoordinate) && (newY > (coordinateArray[i].yCoordinate - 0.01))) && ((newX > coordinateArray[i].xCoordinate) && (newX < (coordinateArray[i].xCoordinate + 0.01)))) {
-            alertSound.play();
+            alert();
         }
 
     }
