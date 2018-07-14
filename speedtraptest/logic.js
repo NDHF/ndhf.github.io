@@ -1,34 +1,33 @@
-var coordinateArray = [
-{
-    name: "westminsterStation",
-    xCoordinate: 39.82,
-    yCoordinate: -105.02
-},    
-{
-    name: "denverUnionStation",
-    xCoordinate: 39.75,
-    yCoordinate: -105.00
-}, 
-{
-    name: "policeStation",
-    xCoordinate: 39.68,
-    yCoordinate: -104.96
-},
-{
-    name: "chamberlinObservatory",
-    xCoordinate: 39.67,
-    yCoordinate: -104.96
-},
-{
-    name: "104th84th",
-    xCoordinate: 39.846732,
-    yCoordinate: -104.984662
-},
-{
-    name: "Illegal Petes DU",
-    xCoordinate: 39.6782694,
-    yCoordinate: -104.9688653
-}
+var coordinateArray = [{
+        name: "Illegal Petes DU",
+        xCoordinate: 39.6782694,
+        yCoordinate: -104.9688653
+    },
+    {
+        name: "westminsterStation",
+        xCoordinate: 39.82,
+        yCoordinate: -105.02
+    },
+    {
+        name: "denverUnionStation",
+        xCoordinate: 39.75,
+        yCoordinate: -105.00
+    },
+    {
+        name: "policeStation",
+        xCoordinate: 39.68,
+        yCoordinate: -104.96
+    },
+    {
+        name: "chamberlinObservatory",
+        xCoordinate: 39.67,
+        yCoordinate: -104.96
+    },
+    {
+        name: "104th84th",
+        xCoordinate: 39.846732,
+        yCoordinate: -104.984662
+    }
 ];
 
 function getLocation() {
@@ -86,27 +85,27 @@ $("#playAlert").on("click", function () {
 
 //This code is used to 'snooze' the proximity alert, by checking the value of a counter variable
 
-    var counter = 0;
-    console.log("counter value is: " + counter);
+var counter = 0;
+console.log("counter value is: " + counter);
 
-    function resetCounter() {
-        counter = 0;
-        console.log("resetCounter has been called");
-    };
+function resetCounter() {
+    counter = 0;
+    console.log("resetCounter has been called");
+};
 
-    function playAlert() {
-        if (counter === 0) {
-                counter = 1;
-                console.log("Counter value is now: " + counter);
-                alertSound.play();
-                $("#direction-two").html(coordinateArray[i].name);
-                console.log("Alert sound has been played");
-                setTimeout(resetCounter, 60000);
-                console.log("Counter reset timer has been set");
-            } else if (counter === 1) {
-                console.log("Alert is on snooze");
-            }
-    };
+function playAlert() {
+    if (counter === 0) {
+        counter = 1;
+        console.log("Counter value is now: " + counter);
+        alertSound.play();
+        $("#direction-two").html(coordinateArray[i].name);
+        console.log("Alert sound has been played");
+        setTimeout(resetCounter, 60000);
+        console.log("Counter reset timer has been set");
+    } else if (counter === 1) {
+        console.log("Alert is on snooze");
+    }
+};
 
 //oldX is the x-coordinate from an old position, newX is the updated value. Ditto for oldY and newY
 var direction;
@@ -186,4 +185,3 @@ setInterval(function () {
     currentDirection();
     proximityCheck();
 }, 10000);
-
