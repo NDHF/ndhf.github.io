@@ -19,12 +19,12 @@ img {
     margin-right: auto;
 }
 
-#buttons {
-    text-align: center;
-    margin-top: 20px;
-}
-
 p {
     padding-top: 10px;
     text-align: center;
 }
+
+button {
+    margin: 5px;
+}
+

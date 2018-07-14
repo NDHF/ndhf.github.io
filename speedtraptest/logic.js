@@ -1,20 +1,3 @@
-$(document).on("click", "#submitButton", function () {
-    console.log("test");
-
-    //Key for the Google API:
-    // var APIKey = "AIzaSyB-cP9CrYbHOtYNDY2_aNHIzDjR3DvHjwE";
-
-
-    //Declaring the Giphy API's query URL as a variable, incorporating our API key and search term
-    //The "&limit5" will produce 5 results per click
-    // var queryURL = "https://roads.googleapis.com/v1/snapToRoads?path=-35.27801,149.12958|-35.28032,149.12907|-35.28099,149.12929|-35.28144,149.12984|-35.28194,149.13003|-35.28282,149.12956|-35.28302,149.12881|-35.28473,149.12836&interpolate=true&key=" + APIKey;
-    var parameters = "placeId=ChIJX12duJAwGQ0Ra0d4Oi4jOGE&placeId=ChIJLQcticc0GQ0RoiNZJVa5GxU";
-    var queryURL = "https://roads.googleapis.com/v1/speedLimits?" + parameters + "&key=" + APIKey;
-
-    console.log(queryURL);
-
-});
-
 var coordinateArray = [
 {
     name: "westminsterStation",
@@ -40,6 +23,11 @@ var coordinateArray = [
     name: "104th84th",
     xCoordinate: 39.846732,
     yCoordinate: -104.984662
+},
+{
+    name: "Illegal Petes DU",
+    xCoordinate: 39.6782694,
+    yCoordinate: -104.9688653
 }
 ];
 
@@ -119,9 +107,9 @@ $("#playAlert").on("click", function () {
             }
     };
 
-
-
 //oldX is the x-coordinate from an old position, newX is the updated value. Ditto for oldY and newY
+var direction;
+
 function currentDirection() {
 
     if ((newX > oldX) && (newY === oldY)) {
@@ -197,3 +185,4 @@ setInterval(function () {
     currentDirection();
     proximityCheck();
 }, 10000);
+
