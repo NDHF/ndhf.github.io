@@ -99,6 +99,7 @@ $("#playAlert").on("click", function () {
                 counter = 1;
                 console.log("Counter value is now: " + counter);
                 alertSound.play();
+                $("#direction-two").html(coordinateArray[i].name);
                 console.log("Alert sound has been played");
                 setTimeout(resetCounter, 60000);
                 console.log("Counter reset timer has been set");
