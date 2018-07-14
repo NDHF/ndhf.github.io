@@ -94,7 +94,7 @@ $("#playAlert").on("click", function () {
         console.log("resetCounter has been called");
     };
 
-    function alert() {
+    function playAlert() {
         if (counter === 0) {
                 counter = 1;
                 console.log("Counter value is now: " + counter);
