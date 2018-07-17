@@ -1,48 +1,48 @@
 var coordinateArray = [
     {
         objectName: "Miners Museum",
-        objectLongitude: 39.9980,
-        objectLatitude: -105.0896
+        objectLatitude: 39.99,
+        objectLongitude: -105.08
     },
     {
         objectName: "Dairy Queen Lafayette",
-        objectLongitude: 40.0174,
-        objectLatitude: -105.1017,
+        objectLatitude: 40.01,
+        objectLongitude: -105.10
     },
     {
         objectName: "Home",
-        objectLongitude: 40.0036287,
-        objectLatitude: -105.117248,
+        objectLatitude: 39.98,
+        objectLongitude: -104.71
     },
     {
         objectName: "Illegal Petes DU",
-        objectLongitude: 39.6782694,
-        objectLatitude: -104.9688653
+        objectLatitude: 39.67,
+        objectLongitude: -104.96
     },
     {
         objectName: "Westminster Station",
-        objectLongitude: 39.82,
-        objectLatitude: -105.02
+        objectLatitude: 39.82,
+        objectLongitude: -105.02
     },
     {
         objectName: "Denver Union Station",
-        objectLongitude: 39.75,
-        objectLatitude: -105.00
+        objectLatitude: 39.75,
+        objectLongitude: -105.00
     },
     {
         objectName: "Police Station",
-        objectLongitude: 39.68,
-        objectLatitude: -104.96
+        objectLatitude: 39.68,
+        objectLongitude: -104.96
     },
     {
         objectName: "Chamberlin Observatory",
-        objectLongitude: 39.67,
-        objectLatitude: -104.96
+        objectLatitude: 39.67,
+        objectLongitude: -104.96
     },
     {
         objectName: "104th & 84th",
-        objectLongitude: 39.846732,
-        objectLatitude: -104.984662
+        objectLatitude: 39.84,
+        objectLongitude: -104.98
     }
 ];
 
@@ -61,8 +61,8 @@ function getLocation() {
 //With map coordinates, the third decimal point measures a distance of 0.068 miles.
 //The functions are called every ten seconds. Therefore, the user must be traveling at least 0.068 miles every ten seconds, or about 24 miles per hour. 
 function showPosition(position) {
-    $("#location").html("Latitude: " + "<span id='latitudeSpan'>" + position.coords.latitude + "</span>" +
-        "<br>Longitude: " + "<span id='longitudeSpan'>" + position.coords.longitude + "</span>");
+    $("#location").html("Latitude: " + "<span id='latitudeSpan'>" + position.coords.latitude.toFixed(2) + "</span>" +
+        "<br>Longitude: " + "<span id='longitudeSpan'>" + position.coords.longitude.toFixed(2) + "</span>");
     console.log("test");
 };
 
@@ -114,7 +114,7 @@ function playAlert() {
         counter = 1;
         console.log("Counter value is now: " + counter);
         alertSound.play();
-        $("#direction-two").html(coordinateArray[i].objectName);
+       
         console.log("Alert sound has been played");
         setTimeout(resetCounter, 60000);
         console.log("Counter reset timer has been set");
@@ -196,7 +196,15 @@ function proximityCheck() {
             playAlert();
         } else if (((newLatitude < coordinateArray[i].objectLatitude) && (newLatitude > (coordinateArray[i].objectLatitude - 0.01))) && ((newLongitude > coordinateArray[i].objectLongitude) && (newLongitude < (coordinateArray[i].objectLongitude + 0.01)))) {
             playAlert();
-        }
+        } /* else if (((newLatitude > (coordinateArray[i].objectLatitude - 0.01)) && (newLatitude < (coordinateArray[i].objectLatitude + 0.01))) && ((newLongitude > (coordinateArray[i].objectLongitude - 0.01)) && (newLongitude < (coordinateArray[i].objectLongitude + 0.01)))) {
+            playAlert();
+            console.log("Yeah, baby!");
+            $("#direction-two").html(coordinateArray[i].objectName);
+        } else if ((newLatitude === coordinateArray[i].objectLatitude) && (newLongitude === coordinateArray[i].objectLongitude)) {
+            playAlert();
+            console.log("Yeah, baby!");
+            $("#direction-two").html(coordinateArray[i].objectName);
+        } */
 
     }
 }
