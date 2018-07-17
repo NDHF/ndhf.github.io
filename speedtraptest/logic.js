@@ -46,7 +46,7 @@ var coordinateArray = [
     }
 ];
 
-alert("Welcome");
+//alert("Welcome");
 $("#mainArea").hide();
 $("#start").show();
 
@@ -54,6 +54,7 @@ $("#startButton").on("click", function() {
 
     $("#mainArea").show();
     $("#start").hide();
+    introSound.play();
 
 });
 
@@ -99,6 +100,9 @@ function newValues() {
 
 //Alert sound is pup_alert by willy_ineedthatapp_com https://freesound.org/people/willy_ineedthatapp_com/sounds/167337/, licensed under Creative Commons 0
 var alertSound = new Audio('assets/audio/167337__willy-ineedthatapp-com__pup-alert.mp3');
+
+//Intro sound is synth bleep by _dippy https://freesound.org/people/dippy_/sounds/220864/, licensed under Creative Commons 0
+var introSound = new Audio('assets/audio/220864__dippy__synth-bleep.mp3')
 
 $("#playAlert").on("click", function () {
 
