@@ -54,7 +54,7 @@ $("#startButton").on("click", function() {
 
     $("#mainArea").show();
     $("#start").hide();
-    introSound.play();
+    alertSound.play();
 
 });
 
