@@ -182,20 +182,36 @@ function proximityCheck() {
 
         if (((newLatitude < coordinateArray[i].objectLatitude) && (newLatitude > (coordinateArray[i].objectLatitude - 0.01))) && (newLongitude === coordinateArray[i].objectLongitude)) {
             playAlert();
+            console.log("Yeah, baby!");
+            console.log(coordinateArray[i].objectName);
         } else if (((newLatitude > coordinateArray[i].objectLatitude) && (newLatitude < (coordinateArray[i].objectLatitude + 0.01))) && (newLongitude === coordinateArray[i].objectLongitude)) {
             playAlert();
+            console.log("Yeah, baby!");
+            console.log(coordinateArray[i].objectName);
         } else if (((newLongitude > coordinateArray[i].objectLongitude) && (newLongitude < (coordinateArray[i].objectLongitude + 0.01))) && (newLatitude === coordinateArray[i].objectLatitude)) {
             playAlert();
+            console.log("Yeah, baby!");
+            console.log(coordinateArray[i].objectName);
         } else if (((newLongitude < coordinateArray[i].objectLongitude) && (newLongitude > (coordinateArray[i].objectLongitude - 0.01))) && (newLatitude === coordinateArray[i].objectLatitude)) {
             playAlert();
+            console.log("Yeah, baby!");
+            console.log(coordinateArray[i].objectName);
         } else if (((newLatitude < coordinateArray[i].objectLatitude) && (newLatitude > (coordinateArray[i].objectLatitude - 0.01))) && ((newLongitude < coordinateArray[i].objectLongitude) && (newLongitude > (coordinateArray[i].objectLongitude - 0.01)))) {
             playAlert();
+            console.log("Yeah, baby!");
+            console.log(coordinateArray[i].objectName);
         } else if (((newLatitude > coordinateArray[i].objectLatitude) && (newLatitude < (coordinateArray[i].objectLatitude + 0.01))) && ((newLongitude < coordinateArray[i].objectLongitude) && (newLongitude > (coordinateArray[i].objectLongitude - 0.01)))) {
             playAlert();
+            console.log("Yeah, baby!");
+            console.log(coordinateArray[i].objectName);
         } else if (((newLatitude > coordinateArray[i].objectLatitude) && (newLatitude < (coordinateArray[i].objectLatitude + 0.01))) && ((newLongitude > coordinateArray[i].objectLongitude) && (newLongitude < (coordinateArray[i].objectLongitude + 0.01)))) {
             playAlert();
+            console.log("Yeah, baby!");
+            console.log(coordinateArray[i].objectName);
         } else if (((newLatitude < coordinateArray[i].objectLatitude) && (newLatitude > (coordinateArray[i].objectLatitude - 0.01))) && ((newLongitude > coordinateArray[i].objectLongitude) && (newLongitude < (coordinateArray[i].objectLongitude + 0.01)))) {
             playAlert();
+            console.log("Yeah, baby!");
+            console.log(coordinateArray[i].objectName);
         } /* else if (((newLatitude > (coordinateArray[i].objectLatitude - 0.01)) && (newLatitude < (coordinateArray[i].objectLatitude + 0.01))) && ((newLongitude > (coordinateArray[i].objectLongitude - 0.01)) && (newLongitude < (coordinateArray[i].objectLongitude + 0.01)))) {
             playAlert();
             console.log("Yeah, baby!");
