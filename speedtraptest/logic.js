@@ -1,5 +1,15 @@
 var coordinateArray = [
     {
+        objectName: "Minute Key Corporate",
+        objectLatitude: 40.01,
+        objectLongitude: -105.24
+    },
+    {
+        objectName: "University of Denver Station",
+        objectLatitude: 39.68,
+        objectLongitude: -104.96
+    },
+    {
         objectName: "Miners Museum",
         objectLatitude: 39.99,
         objectLongitude: -105.08
