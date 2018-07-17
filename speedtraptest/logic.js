@@ -61,8 +61,8 @@ function getLocation() {
 //With map coordinates, the third decimal point measures a distance of 0.068 miles.
 //The functions are called every ten seconds. Therefore, the user must be traveling at least 0.068 miles every ten seconds, or about 24 miles per hour. 
 function showPosition(position) {
-    $("#location").html("Latitude: " + "<span id='latitudeSpan'>" + position.coords.latitude.toFixed(2) + "</span>" +
-        "<br>Longitude: " + "<span id='longitudeSpan'>" + position.coords.longitude.toFixed(2) + "</span>");
+    $("#location").html("Latitude: " + "<span id='latitudeSpan'>" + position.coords.latitude + "</span>" +
+        "<br>Longitude: " + "<span id='longitudeSpan'>" + position.coords.longitude + "</span>");
     console.log("test");
 };
 
