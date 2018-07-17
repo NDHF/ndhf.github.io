@@ -220,7 +220,11 @@ function proximityCheck() {
             console.log("Yeah, baby!");
             console.log(coordinateArray[i].objectName);
             $("#location-two").html(coordinateArray[i].objectName);
-        } /* else if (((newLatitude > (coordinateArray[i].objectLatitude - 0.01)) && (newLatitude < (coordinateArray[i].objectLatitude + 0.01))) && ((newLongitude > (coordinateArray[i].objectLongitude - 0.01)) && (newLongitude < (coordinateArray[i].objectLongitude + 0.01)))) {
+        } else {
+            $("#location-three").html("You are not near any of the coordinates.");
+
+        }
+        /* else if (((newLatitude > (coordinateArray[i].objectLatitude - 0.01)) && (newLatitude < (coordinateArray[i].objectLatitude + 0.01))) && ((newLongitude > (coordinateArray[i].objectLongitude - 0.01)) && (newLongitude < (coordinateArray[i].objectLongitude + 0.01)))) {
             playAlert();
             console.log("Yeah, baby!");
             $("#direction-two").html(coordinateArray[i].objectName);
