@@ -131,11 +131,11 @@ var direction;
 
 function currentDirection() {
 
-    if ((newLongitude > oldLongitude) && (newLatitude === oldLatitude)) {
+    if ((newLongitude < oldLongitude) && (newLatitude === oldLatitude)) {
         direction = "east";
         $("#direction").html(direction);
         console.log(direction);
-    } else if ((newLongitude < oldLongitude) && (newLatitude === oldLatitude)) {
+    } else if ((newLongitude > oldLongitude) && (newLatitude === oldLatitude)) {
         direction = "west";
         $("#direction").html(direction);
         console.log(direction);
@@ -147,19 +147,19 @@ function currentDirection() {
         direction = "south";
         $("#direction").html(direction);
         console.log(direction);
-    } else if ((newLongitude > oldLongitude) && (newLatitude > oldLatitude)) {
+    } else if ((newLongitude < oldLongitude) && (newLatitude > oldLatitude)) {
         direction = "northeast";
         $("#direction").html(direction);
         console.log(direction);
-    } else if ((newLongitude > oldLongitude) && (newLatitude < oldLatitude)) {
+    } else if ((newLongitude < oldLongitude) && (newLatitude < oldLatitude)) {
         direction = "southeast";
         $("#direction").html(direction);
         console.log(direction);
-    } else if ((newLongitude < oldLongitude) && (newLatitude < oldLatitude)) {
+    } else if ((newLongitude > oldLongitude) && (newLatitude < oldLatitude)) {
         direction = "southwest";
         $("#direction").html(direction);
         console.log(direction);
-    } else if ((newLongitude < newLongitude) && (newLatitude > oldLatitude)) {
+    } else if ((newLongitude > newLongitude) && (newLatitude > oldLatitude)) {
         direction = "northwest";
         $("#direction").html(direction);
         console.log(direction);
@@ -184,34 +184,42 @@ function proximityCheck() {
             playAlert();
             console.log("Yeah, baby!");
             console.log(coordinateArray[i].objectName);
+            $("#location-two").html(coordinateArray[i].objectName);
         } else if (((newLatitude > coordinateArray[i].objectLatitude) && (newLatitude < (coordinateArray[i].objectLatitude + 0.01))) && (newLongitude === coordinateArray[i].objectLongitude)) {
             playAlert();
             console.log("Yeah, baby!");
             console.log(coordinateArray[i].objectName);
+            $("#location-two").html(coordinateArray[i].objectName);
         } else if (((newLongitude > coordinateArray[i].objectLongitude) && (newLongitude < (coordinateArray[i].objectLongitude + 0.01))) && (newLatitude === coordinateArray[i].objectLatitude)) {
             playAlert();
             console.log("Yeah, baby!");
             console.log(coordinateArray[i].objectName);
+            $("#location-two").html(coordinateArray[i].objectName);
         } else if (((newLongitude < coordinateArray[i].objectLongitude) && (newLongitude > (coordinateArray[i].objectLongitude - 0.01))) && (newLatitude === coordinateArray[i].objectLatitude)) {
             playAlert();
             console.log("Yeah, baby!");
             console.log(coordinateArray[i].objectName);
+            $("#location-two").html(coordinateArray[i].objectName);
         } else if (((newLatitude < coordinateArray[i].objectLatitude) && (newLatitude > (coordinateArray[i].objectLatitude - 0.01))) && ((newLongitude < coordinateArray[i].objectLongitude) && (newLongitude > (coordinateArray[i].objectLongitude - 0.01)))) {
             playAlert();
             console.log("Yeah, baby!");
             console.log(coordinateArray[i].objectName);
+            $("#location-two").html(coordinateArray[i].objectName);
         } else if (((newLatitude > coordinateArray[i].objectLatitude) && (newLatitude < (coordinateArray[i].objectLatitude + 0.01))) && ((newLongitude < coordinateArray[i].objectLongitude) && (newLongitude > (coordinateArray[i].objectLongitude - 0.01)))) {
             playAlert();
             console.log("Yeah, baby!");
             console.log(coordinateArray[i].objectName);
+            $("#location-two").html(coordinateArray[i].objectName);
         } else if (((newLatitude > coordinateArray[i].objectLatitude) && (newLatitude < (coordinateArray[i].objectLatitude + 0.01))) && ((newLongitude > coordinateArray[i].objectLongitude) && (newLongitude < (coordinateArray[i].objectLongitude + 0.01)))) {
             playAlert();
             console.log("Yeah, baby!");
             console.log(coordinateArray[i].objectName);
+            $("#location-two").html(coordinateArray[i].objectName);
         } else if (((newLatitude < coordinateArray[i].objectLatitude) && (newLatitude > (coordinateArray[i].objectLatitude - 0.01))) && ((newLongitude > coordinateArray[i].objectLongitude) && (newLongitude < (coordinateArray[i].objectLongitude + 0.01)))) {
             playAlert();
             console.log("Yeah, baby!");
             console.log(coordinateArray[i].objectName);
+            $("#location-two").html(coordinateArray[i].objectName);
         } /* else if (((newLatitude > (coordinateArray[i].objectLatitude - 0.01)) && (newLatitude < (coordinateArray[i].objectLatitude + 0.01))) && ((newLongitude > (coordinateArray[i].objectLongitude - 0.01)) && (newLongitude < (coordinateArray[i].objectLongitude + 0.01)))) {
             playAlert();
             console.log("Yeah, baby!");
