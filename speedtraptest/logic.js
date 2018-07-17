@@ -46,6 +46,17 @@ var coordinateArray = [
     }
 ];
 
+alert("Welcome");
+$("#mainArea").hide();
+$("#start").show();
+
+$("#startButton").on("click", function() {
+
+    $("#mainArea").show();
+    $("#start").hide();
+
+});
+
 function getLocation() {
 
     console.log("Location obtained");
