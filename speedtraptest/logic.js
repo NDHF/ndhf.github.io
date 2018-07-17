@@ -20,27 +20,27 @@ var coordinateArray = [
         objectLatitude: -104.9688653
     },
     {
-        objectName: "westminsterStation",
+        objectName: "Westminster Station",
         objectLongitude: 39.82,
         objectLatitude: -105.02
     },
     {
-        objectName: "denverUnionStation",
+        objectName: "Denver Union Station",
         objectLongitude: 39.75,
         objectLatitude: -105.00
     },
     {
-        objectName: "policeStation",
+        objectName: "Police Station",
         objectLongitude: 39.68,
         objectLatitude: -104.96
     },
     {
-        objectName: "chamberlinObservatory",
+        objectName: "Chamberlin Observatory",
         objectLongitude: 39.67,
         objectLatitude: -104.96
     },
     {
-        objectName: "104th84th",
+        objectName: "104th & 84th",
         objectLongitude: 39.846732,
         objectLatitude: -104.984662
     }
@@ -176,7 +176,9 @@ function currentDirection() {
 //through an array of coordinates. The for-loop functon can be called using a setInterval.
 
 function proximityCheck() {
-    for (i = 0; i <= coordinateArray.length; i++) {
+    for (var i = 0; i < coordinateArray.length; i++) {
+
+        //console.log(coordinateArray[i].objectName);
 
         if (((newLatitude < coordinateArray[i].objectLatitude) && (newLatitude > (coordinateArray[i].objectLatitude - 0.01))) && (newLongitude === coordinateArray[i].objectLongitude)) {
             playAlert();
