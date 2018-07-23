@@ -4,62 +4,85 @@
 
 <head>
     <title>My Profile</title>
- <!--   <link rel="stylesheet" type="text/css" href="assets/css/reset.css"> -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <!-- Favicon -->
     <link rel="icon" 
       type="image/gif" 
       href="njbfavicon.gif">
+    <!-- Viewport to make Bootstrap work -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 </head>
 
-<body>
+<body style="background-color: lightgray;">
 
-    <div id="main">
-
-        <div id="top">
-
-            <header>
-                <h1 id="name">Nicholas Bernhard</h1>
-            </header>
-
-            <nav>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                        <a class="navbar-brand" href="#">Nicholas Bernhard</a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                          <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" style="text-align: right" id="navbarNav">
+                          <ul class="navbar-nav">
+                            <li class="nav-item active">
+                              <a class="nav-link" href="index.html">About Me<span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item active">
+                              <a class="nav-link" href="portfolio.html">Portfolio</a>
+                            </li>
+                            <li class="nav-item active">
+                              <a class="nav-link" href="contact.html">Contact</a>
+                            </li>
+                          </ul>
+                        </div>
+                      </nav>
+        </div>
+        </div>
+        <br>
+        <br>
+    <div class="row" style="margin-bottom: 40px;">
+        <div class="col-md-1"></div>
+        <div class="col-md-10" style="background-color: white; padding: 20px;">
+            <div class="row">
+                <div class="col-md-12" style="background-color:white">
+                    <h1 style="color:teal;font-family:Georgia, 'Times New Roman', Times, serif">About Me</h1>
+                    <hr>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="images/nicholasprofile.jpg" style='height: 100%; width: 100%; object-fit: contain'>
+                </div>
+                <div class="col-md-8">
+                    <p>Nicholas Bernhard is a writer, composer, and filmmaker. His films include <a href="https://ndhf.vhx.tv/products/blackstone-s-equation-the-tim-masters-story-movie-only"><i><b>Blackstone's Equation</b></i></a>, a feature
+                    documentary about Colorado's worst wrongful conviction case. In 2017, he published the historical novel
+                <a href="http://a.co/fjocpee"><i><b>November in America</b></i></a>, based on the Coal Strike of 1927. He has also written for <a href="https://yellowscene.com/author/nicholas-bernhard/"><i><b>Yellow Scene Magazine</b></i></a>. Since 2016, he has been Exhibit Technician at the Miners Museum in Lafayette, Colorado.</p>
+        
+                    <p>Nicholas enjoys playing piano and bass, writing songs, and hiking. Some of his bass covers may be found
+                        <a href="https://www.youtube.com/watch?v=QFm9iGVM17c&list=PL441Qrw6QQ7YWuRMzDEazEHVoQsTJeeUg">here</a>.
+                    </p>
                 <ul>
-                    <li><a class="menu" href="index.html">About</a></li>
-                    <li id="portfolio"><a class="menu" href="portfolio.html">Portfolio</a></li>
-                    <li><a class="menu" href="contact.html">Contact</a></li>
+                <li><a href="https://github.com/NDHF">Check out my GitHub Repos</a></li>
+                <li><a href="https://www.linkedin.com/in/nicholas-bernhard-b6b2b863/">Resum&eacute; on LinkedIn</a></li>
+                <li>Email me at Nicholas[at][NDHFilms][dot com]</li>
                 </ul>
-            </nav>
 
+                </div>
+            </div>
         </div>
-
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-
-        <div id="maincontent">
-            <h1 id="maincontentheader">About Me</h1>
-
-            <hr>
-
-            <img src="./assets/images/nicholasprofile.jpg" width="20%" height="20%" title="Nicholas Bernhard" alt="Nicholas Bernhard profile photo">
-
-            <p>Nicholas Bernhard is a writer, composer, and filmmaker. His films include <a href="https://ndhf.vhx.tv/products/blackstone-s-equation-the-tim-masters-story-movie-only"><i><b>Blackstone's Equation</b></i></a>, a feature
-            documentary about Colorado's worst wrongful conviction case. In 2017, he published the historical novel
-        <a href="http://a.co/fjocpee"><i><b>November in America</b></i></a>, based on the Coal Strike of 1927. He has also written for <a href="https://yellowscene.com/author/nicholas-bernhard/"><i><b>Yellow Scene Magazine</b></i></a>. Since 2016, he has been Exhibit Technician at the Miners Museum in Lafayette, Colorado.</p>
-
-            <p>Nicholas enjoys playing piano and bass, writing songs, and hiking. Some of his bass covers may be found
-                <a href="https://www.youtube.com/watch?v=QFm9iGVM17c&list=PL441Qrw6QQ7YWuRMzDEazEHVoQsTJeeUg">here</a>.
-            </p>
-
-            <br>
-            <br>
-
-        </div>
-
-        <footer>&copy; 2018 NDH Ltd.</footer>
-
+        <div class="col-md-1"></div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="footer-copyright text-center py-3" style="background-color: gray;color:white;border-top: 5px solid teal; position:fixed; bottom:0;left:0;width:100%;">
+                &copy; 2018 Copyright: Nicholas Bernhard
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 

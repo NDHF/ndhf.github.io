@@ -3,82 +3,180 @@
 <html>
 
 <head>
-    <title>My Profile</title>
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    <link rel="icon" 
-      type="image/gif" 
-      href="njbfavicon.gif">
+  <title>Portfolio</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/gif" href="njbfavicon.gif">
+  <!-- Viewport to make Bootstrap work -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap -->
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+    crossorigin="anonymous">
 </head>
 
-<body>
+<body style="background-color: lightgray;">
 
-    <div id="main">
-
-        <div id="top">
-
-            <header>
-                <h1 id="name">Nicholas Bernhard</h1>
-            </header>
-
-            <nav>
-                <ul>
-                    <li><a class="menu" href="index.html">About</a></li>
-                    <li id="portfolio"><a class="menu" href="portfolio.html">Portfolio</a></li>
-                    <li><a class="menu" href="contact.html">Contact</a></li>
-                </ul>
-            </nav>
-
-        </div>
-
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-
-        <div id="maincontent">
-            <h1 id="maincontentheader">Portfolio</h1>
-
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <a class="navbar-brand" href="#">Nicholas Bernhard</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" style="text-align: right" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item active">
+                <a class="nav-link" href="index.html">About Me
+                  <span class="sr-only">(current)</span>
+                </a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="portfolio.html">Portfolio</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="contact.html">Contact</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <br>
+    <br>
+    <div class="row" style="margin-bottom: 40px;">
+      <div class="col-md-1"></div>
+      <div class="col-md-10" style="background-color: white; padding: 20px;">
+        <div class="row">
+          <div class="col-md-12" style="background-color:white">
+            <h1 style="color:teal;font-family:Georgia, 'Times New Roman', Times, serif">Portfolio</h1>
             <hr>
-
-            <div id="gallerycontainer">
-
-                    <div class="galleryitem">
-                            <a href="https://ndhf.vhx.tv/products/blackstone-s-equation-the-tim-masters-story-movie-only">
-                            <img src="assets/images/5.jpg" title="Blackstone's Equation by Nicholas Bernhard" alt="Blackstone's Equation by Nicholas Bernhard">
-                            </a>
-                        </div>
-
-                        <div class="galleryitem">
-                                <a href="http://a.co/gLFji9f">
-                                <img src="assets/images/4.jpg" title="November in America by Nicholas Bernhard" alt="November in America by Nicholas Bernhard">
-                                </a>
-                            </div>
-
-                            <div class="galleryitem">
-                                    <a href="https://yellowscene.com/author/nicholas-bernhard/">
-                                    <img src="assets/images/3.jpg" title="Yellow Scene History Articles"" alt="Yellow Scene History Articles">
-                                    </a>
-                                </div>
-
-                                <div class="galleryitem">
-                                        <a href="https://yellowscene.com/author/nicholas-bernhard/">
-                                        <img src="assets/images/1.jpg" title="Bass Covers on YouTube" alt="Bass Covers on YouTube">
-                                        </a>
-                                    </div>
-                                
-                                <div class="galleryitem">
-                                        <a href="https://youtu.be/gBX64DbLWuU">
-                                        <img src="assets/images/6.jpg" title="Glava Horror Movie" alt="Glava Horror Movie">
-                                        </a>
-                                    </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card-columns">
+              <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="assets/images/portfoliothumbnails/speedtrapthumbnail.jpg" alt="Speed trApp Thumbnail">
+                <div class="card-body">
+                  <h5 class="card-title">Speed trApp</h5>
+                  <p class="card-text">An app that lets users report predatory speed traps to each other.</p>
+                  <p>
+                    <a href="https://github.com/nicholas-harvey/Group_Project_1">GitHub Repo</a>
+                  </p>
+                  <a href="https://nicholas-harvey.github.io/Group_Project_1/" class="btn btn-primary">Check It Out!</a>
+                </div>
+              </div>
+              <div class="card" style="width: 18rem;">
+                  <img class="card-img-top" src="assets/images/portfoliothumbnails/navigatecellsthumbnail.jpg" alt="Navigate Cells Thumbnail">
+                  <div class="card-body">
+                    <h5 class="card-title">Navigating Cells</h5>
+                    <p class="card-text">Code for navigating multidimensional arrays.</p>
+                    <p>
+                      <a href="https://github.com/NDHF/navigate-cells">GitHub Repo</a>
+                    </p>
+                    <a href="http://www.ndhfilms.com/other/navigatecells/index.html" class="btn btn-primary">Check It Out!</a>
+                  </div>
+                </div>
+              <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="assets/images/portfoliothumbnails/hangmanthumbnail.jpg" alt="Hangman Game Thumbnail">
+                <div class="card-body">
+                  <h5 class="card-title">Hangman Game</h5>
+                  <p class="card-text">A hangman game coded with JavaScript</p>
+                  <p>
+                    <a href="https://github.com/NDHF/Word-Guess-Game">GitHub Repo</a>
+                  </p>
+                  <a href="hangman/index.html" class="btn btn-primary">Check It Out!</a>
+                </div>
+              </div>
+              <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="assets/images/portfoliothumbnails/triviagamethumbnail.jpg" alt="Trivia Game Thumbnail">
+                <div class="card-body">
+                  <h5 class="card-title">Trivia Game</h5>
+                  <p class="card-text">A time-based trivia game using jQuery and JS timeouts</p>
+                  <p>
+                    <a href="https://github.com/NDHF/TriviaGame">GitHub Repo</a>
+                  </p>
+                  <a href="trivia/index.html" class="btn btn-primary">Check It Out!</a>
+                </div>
+              </div>
+              <div class="card" style="width: 18rem;">
+                  <img class="card-img-top" src="assets/images/portfoliothumbnails/gifappthumbnail.jpg" alt="Gif App Thumbnail">
+                  <div class="card-body">
+                    <h5 class="card-title">Gif App</h5>
+                    <p class="card-text">An app that loads Gifs from a number of presets. Users may also make their own presets.</p>
+                    <p>
+                      <a href="https://ndhf.github.io/gif-app/index.html">GitHub Repo</a>
+                    </p>
+                    <a href="https://github.com/NDHF/gif-app" class="btn btn-primary">Check It Out!</a>
+                  </div>
+                </div>
+              <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="images/1.jpg" alt="Bass covers">
+                <div class="card-body">
+                  <h5 class="card-title">Bass Covers</h5>
+                  <p class="card-text">Check out some songs I've covered on bass guitar!</p>
+                  <a href="#" class="btn btn-primary">Watch</a>
+                </div>
+                <div class="card" style="width: 18rem;">
+                  <img class="card-img-top" src="images/2.jpg" alt="Blackstone's Equation Trailer">
+                  <div class="card-body">
+                    <h5 class="card-title">Blackstone's Equation Trailer</h5>
+                    <p class="card-text">Watch the trailer for my feature-length documentary,
+                      <i>Blackstone's Equation</i>.</p>
+                    <a href="#" class="btn btn-primary">Available on YouTube</a>
+                  </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                  <img class="card-img-top" src="images/3.jpg" alt="Tales of the Northern Coal Field">
+                  <div class="card-body">
+                    <h5 class="card-title">Tales of the Northern Coal Field</h5>
+                    <p class="card-text">Articles about Colorado's northern coal field, as seen in Yellow Scene magazine.</p>
+                    <a href="#" class="btn btn-primary">Available on Yellow Scene</a>
+                  </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                  <img class="card-img-top" src="images/4.jpg" alt="November in America">
+                  <div class="card-body">
+                    <h5 class="card-title">November in America</h5>
+                    <p class="card-text">Check out my novel,
+                      <i>November in America: A Story of Thanksgiving</i>.</p>
+                    <a href="#" class="btn btn-primary">Available on Amazon</a>
+                  </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                  <img class="card-img-top" src="images/5.jpg" alt="Rent Blackstone's Equation">
+                  <div class="card-body">
+                    <h5 class="card-title">Blackstone's Equation on VOD</h5>
+                    <p class="card-text">Buy or rent
+                      <i>Blackstone's Equation</i> online</p>
+                    <a href="#" class="btn btn-primary">Available from VHX</a>
+                  </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                  <img class="card-img-top" src="images/6.jpg" alt="Glava">
+                  <div class="card-body">
+                    <h5 class="card-title">Glava</h5>
+                    <p class="card-text">My silent horror film,
+                      <i>Glava</i>, about the legend of Colorado's own vampire!</p>
+                    <a href="#" class="btn btn-primary">Watch for Free on YouTube</a>
+                  </div>
+                </div>
+              </div>
 
             </div>
-
+          </div>
         </div>
-
-        <footer>&copy; 2018 NDH Ltd.</footer>
-
+        <div class="col-md-1"></div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="footer-copyright text-center py-3" style="background-color: gray;color:white;border-top: 5px solid teal; position:fixed; bottom:0;left:0;width:100%;">
+            &copy; 2018 Copyright: Nicholas Bernhard
+          </div>
+        </div>
+      </div>
     </div>
 
 </body>
