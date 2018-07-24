@@ -36,6 +36,8 @@ var x = 5;
 var y = 2;
 var z = 0;
 
+var direction;
+
 var canMoveForward;
 var canMoveBackward;
 
@@ -140,6 +142,7 @@ function buttonStatus(button, onOrOff) {
 // so they are bundled together. 
 
 function infoPackage() {
+    navigateAudio();
     showCoordinates();
     checkMovements();
     getLocation();
@@ -148,20 +151,35 @@ function infoPackage() {
 // jQuery selectors for navigation buttons
 
 $("#forwardButton").on("click", function() {
-    navigate("forward");
+    direction = "forward";
+    navigate(direction);
 });
 
 $("#backwardButton").on("click", function() {
-    navigate("backward");
+    direction = "backward";
+    navigate(direction);
 });
 
 $("#leftButton").on("click", function() {
-    navigate("ccw");
+    direction = "ccw";
+    navigate(direction);
 });
 
 $("#rightButton").on("click", function() {
-    navigate("cw");
+    direction = "cw";
+    navigate(direction);
 });
+
+function navigateAudio() {
+
+    if (((direction === "forward") && (canMoveForward === true)) || ((direction === "backward") && (canMoveBackward === true))) {
+        console.log("footsteps");
+    } else if ((direction === "ccw") || (direction === "cw")) {
+        console.log("little footsteps");
+    } else {
+        console.log("no footsteps");
+    }
+};
 
 function navigate(direction) {
 
@@ -169,7 +187,7 @@ function navigate(direction) {
         if (direction === "forward") {
             if (canMoveForward === false) {
                 console.log("Not permitted"); 
-            infoPackage();
+                infoPackage();
             } else if (canMoveForward === true) {
                 x--;
                 infoPackage();
@@ -234,7 +252,6 @@ function navigate(direction) {
                 infoPackage();
             } else if (canMoveBackward === true) {
                 y++;
-                console.log(x + "," + y + "," + z);
                 infoPackage();
             }
         } 
@@ -261,9 +278,12 @@ function navigate(direction) {
     }   
 }; 
 
-//This function will give the user a message based on their position.
-//The general if-statement takes two coordinates to show which cell the user is in.
-//The nested if-statement shows different messages for each of the possible directions.
+// This function will give the user a message based on their position.
+// The general if-statement takes two coordinates to show which cell the user is in.
+// The nested if-statement shows different messages for each of the possible directions.
+
+// This function can also be used to add ambient audio based on room, and load photos/video
+
 function getLocation() {
     if ((x === 5) && (y === 2)) {
         console.log("You are in the front yard.");
