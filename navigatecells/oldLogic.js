@@ -217,6 +217,86 @@ if (direction === "ccw") {
 
 };
 
+//Another navigate function 
+
+function navigate(direction) {
+
+if (z === 0) {
+    if (direction === "forward") {
+        if (canMoveForward === false) {
+            console.log("Not permitted"); 
+        } else if (canMoveForward === true) {
+            x--;
+        }
+    } else if (direction === "backward") {
+        if (canMoveBackward === false) {
+            console.log("Not permitted"); 
+        } else if (canMoveBackward === true) {
+            x++;
+        }
+    } 
+} else if (z === 1) {
+    if (direction === "forward") {
+        if (canMoveForward === false) {
+            console.log("Not permitted"); 
+        } else if (canMoveForward === true) {
+            y++;
+        }
+    } else if (direction === "backward") {
+        if (canMoveBackward === false) {
+            console.log("Not permitted");
+        } else if (canMoveBackward === true) {
+            y--;
+        }
+    }
+} else if (z === 2) {
+    if (direction === "forward") {
+        if (canMoveForward === false) {
+            console.log("Not permitted");  
+        } else if (canMoveForward === true) {
+            x++;
+        }
+    } else if (direction === "backward") {
+        if (canMoveBackward === false) {
+            console.log("Not permitted"); 
+        } else if (canMoveBackward === true) {
+            x--;
+        }
+    } 
+} else if (z === 3) {
+    if (direction === "forward") {
+        if (canMoveForward === false) {
+            console.log("Not permitted");
+        } else if (canMoveForward === true) {
+            y--;
+        }
+    } else if (direction === "backward") {
+        if (canMoveBackward === false) {
+            console.log("Not permitted"); 
+        } else if (canMoveBackward === true) {
+            y++;
+        }
+    } 
+}
+
+if (direction === "cw") {
+    if (z === 3) {
+        z = 0;
+    } else {
+        z++;
+    }
+}
+
+if (direction === "ccw") {
+    if (z === 0) {
+        z = 3;
+    } else {
+        z--;
+    }  
+}
+
+};  
+
 // jQuery selectors for left/right strafing
 
 $("#leftButton").on("click", function() {

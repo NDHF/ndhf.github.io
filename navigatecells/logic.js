@@ -41,6 +41,9 @@ var direction;
 var canMoveForward;
 var canMoveBackward;
 
+var moveForwardYes = ((direction === "forward") && (canMoveForward === true));
+var moveBackwardYes = ((direction === "backward") && (canMoveBackward === true));
+
 infoPackage();
 
 // GLOBAL VARIABLES AND FUNCTIONS END
@@ -170,6 +173,25 @@ $("#rightButton").on("click", function() {
     navigate(direction);
 });
 
+$(document).on("keydown", function(event) {
+    
+    console.log("You pressed the " + event.originalEvent.key + " key!");
+
+    if ((event.originalEvent.key === "w") || (event.originalEvent.key === "ArrowUp")) {
+        direction = "forward";
+        navigate(direction);
+    } else if ((event.originalEvent.key === "a") || (event.originalEvent.key === "ArrowLeft")) {
+        direction = "ccw";
+        navigate(direction);
+    } else if ((event.originalEvent.key === "s") || (event.originalEvent.key === "ArrowDown")) {
+        direction = "backward";
+        navigate(direction);
+    } else if ((event.originalEvent.key === "d") || (event.originalEvent.key === "ArrowRight")) {
+        direction = "cw";
+        navigate(direction);
+    } 
+});
+
 function navigateAudio() {
 
     if (((direction === "forward") && (canMoveForward === true)) || ((direction === "backward") && (canMoveBackward === true))) {
@@ -183,99 +205,51 @@ function navigateAudio() {
 
 function navigate(direction) {
 
-    if (z === 0) {
-        if (direction === "forward") {
-            if (canMoveForward === false) {
-                console.log("Not permitted"); 
-                infoPackage();
-            } else if (canMoveForward === true) {
+    if (((direction === "forward") && (canMoveForward === false)) || ((direction === "backward") && (canMoveBackward === false))) {
+        console.log("Not permitted");
+    } else if (z === 0) {
+        if ((direction === "forward") && (canMoveForward === true)) {
                 x--;
-                infoPackage();
-            }
-        } else if (direction === "backward") {
-            if (canMoveBackward === false) {
-                console.log("Not permitted"); 
-                infoPackage();
-            } else if (canMoveBackward === true) {
+            } else if ((direction === "backward") && (canMoveBackward === true)) {
                 x++;
-                infoPackage();
             }
-        } 
     } else if (z === 1) {
-        if (direction === "forward") {
-            if (canMoveForward === false) {
-                console.log("Not permitted"); 
-                infoPackage();
-            } else if (canMoveForward === true) {
+        if ((direction === "forward") && (canMoveForward === true)) {
                 y++;
-                infoPackage();
-            }
-        } else if (direction === "backward") {
-            if (canMoveBackward === false) {
-                console.log("Not permitted");
-                infoPackage();
-            } else if (canMoveBackward === true) {
+            } else if ((direction === "backward") && (canMoveBackward === true)) {
                 y--;
-                infoPackage();
             }
-        }
     } else if (z === 2) {
-        if (direction === "forward") {
-            if (canMoveForward === false) {
-                console.log("Not permitted");  
-                infoPackage();
-            } else if (canMoveForward === true) {
+        if ((direction === "forward") && (canMoveForward === true)) {
                 x++;
-                infoPackage();
-            }
-        } else if (direction === "backward") {
-            if (canMoveBackward === false) {
-                console.log("Not permitted"); 
-                infoPackage();
-            } else if (canMoveBackward === true) {
+            } else if ((direction === "backward") && (canMoveBackward === true)) {
                 x--;
-                infoPackage();
             }
-        } 
-    } else if (z === 3) {
-        if (direction === "forward") {
-            if (canMoveForward === false) {
-                console.log("Not permitted");
-                infoPackage();
-            } else if (canMoveForward === true) {
+        } else if (z === 3) {
+        if ((direction === "forward") && (canMoveForward === true)) {
                 y--;
-                infoPackage();
-            }
-        } else if (direction === "backward") {
-            if (canMoveBackward === false) {
-                console.log("Not permitted"); 
-                infoPackage();
-            } else if (canMoveBackward === true) {
+            } else if ((direction === "backward") && (canMoveBackward === true)) {
                 y++;
-                infoPackage();
             }
         } 
-    }
-    
+     
     if (direction === "cw") {
         if (z === 3) {
             z = 0;
-            infoPackage();
         } else {
             z++;
-            infoPackage();
         }
     }
     
     if (direction === "ccw") {
         if (z === 0) {
             z = 3;
-            infoPackage();
         } else {
             z--;
-            infoPackage();
         }  
     }   
+
+    infoPackage();
 }; 
 
 // This function will give the user a message based on their position.
