@@ -182,10 +182,17 @@ $(document).on("keydown", function(event) {
 
 function navigateAudio() {
 
+    var footsteps = new Audio();
+    footsteps.src = "audio/footsteps/footsteps.mp3";
+    var littleFootsteps = new Audio();
+    littleFootsteps.src = "audio/footsteps/littleFootsteps.mp3";
+
     if (((direction === "forward") && (canMoveForward === true)) || ((direction === "backward") && (canMoveBackward === true))) {
         console.log("footsteps");
+        footsteps.play();
     } else if ((direction === "ccw") || (direction === "cw")) {
         console.log("little footsteps");
+        littleFootsteps.play();
     } else {
         console.log("no footsteps");
     }
