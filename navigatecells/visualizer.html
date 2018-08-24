@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Navigate-Cells Visualizer</title>
+    <!-- jQuery -->
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <style>
+    td {
+        background-color: white;
+        width: 100px;
+        height: 100px;
+    }
+    table {
+        margin-left: auto;
+        margin-right: auto;
+        border: 1px solid black;
+        background-image: url("grass.jpg");
+    }
+    </style>
+</head>
+<body>
+
+    <div id="mapContainer">
+
+    </div>
+
+ 
+<script>
+//         var squareArray = [
+
+// [ [ ], [ ], [ ], [ ] ],
+// [ [ ], [0], [0], [ ] ],
+// [ [ ], [0], [0], [ ] ],
+// [ [ ], [ ], [ ], [ ] ]
+
+// ];
+
+var museumArray = [
+
+[ [          ], [          ], [          ], [          ] ],
+[ [          ], [          ], [0, 1, 2, 3], [          ] ],
+[ [          ], [          ], [0, 1, 2, 3], [          ] ],
+[ [          ], [0, 1, 2, 3], [0, 1, 2, 3], [          ] ],
+[ [          ], [0, 1, 2, 3], [0, 1, 2, 3], [          ] ],
+[ [          ], [          ], [0, 1, 2, 3], [          ] ],
+[ [          ], [          ], [          ], [          ] ]
+
+];
+
+var x = 5;
+var y = 2;
+var z;
+
+var direction;
+
+var canMoveForward;
+var canMoveBackward;
+var canMoveLeft;
+var canMoveRight;
+
+var moveForwardYes = ((direction === "forward") && (canMoveForward === true));
+var moveBackwardYes = ((direction === "backward") && (canMoveBackward === true));
+
+infoPackage();
+
+// GLOBAL VARIABLES AND FUNCTIONS END
+
+//This function will draw an HTML table of the same dimensions as the array. The CSS file defines the styling of each cell.
+function mapGenerator(array) {
+    $("#mapContainer").append("<table></table>");
+    $("#mapContainer table").attr("id", "map");
+
+    console.log("Array length: " + array.length);
+    console.log("Array[0] length: " + array[0].length);
+
+    for (i = 0; i <= array.length - 1; i++) {
+        var tableRow = $("<tr>");
+        tableRow.addClass("row");
+        $("table#map").append(tableRow);
+            for (j = 0; j <= array[0].length - 1; j++) {
+            var tableData = $("<td>");
+            tableData.attr("id", "x" + i + "y" + j);
+            tableRow.append(tableData);
+            }
+        
+    }
+};
+
+function showUndefinedCells(array) {
+    for (var i = 0; i <= array.length - 1; i++) {
+        for (var j = 0; j <= array[0].length - 1; j++) {
+            if (array[i][j][0] === undefined) {
+                // $("#x" + i + "y" + j).css("background-color", "black");
+                $("#x" + i + "y" + j).css("opacity", "0.0");
+            } else if (array[i][j][0] !== undefined) {
+                $("#x" + i + "y" + j).css({"border-color": "rgba(255, 255, 255, 0.0)", 
+             "border-weight":"10px", 
+             "border-style":"solid"}
+            );
+            }
+        }
+    }
+}
+
+var lastFaced;
+
+function addColor(array) {
+    $("td").html("");
+    $("td").css("background", "white");
+    $("td").css("opacity", "0.5");
+    $("#x" + x + "y" + y).css("opacity", "1");
+    $("#x" + x + "y" + y).css("background-color", "rgba(0, 0, 128, 0)");
+    var image = $("<img>");
+    image.attr("src", "samoyed.png");
+    $("#x" + x + "y" + y).html(image);
+};
+
+function flipImage(whichWay) {
+    if (lastFaced === "right") {
+        $("img").css("transform", "scaleX(-1)");
+    } else if (lastFaced === "left") {
+        $("img").css("transform", "scaleX(1)");
+    }
+};
+
+mapGenerator(museumArray);
+
+addColor(museumArray);
+
+showUndefinedCells(museumArray);
+
+// mapGenerator(squareArray);
+
+// addColor(squareArray);
+
+// showUndefinedCells(squareArray);
+
+function showCoordinates() {
+    console.log(x + ", " + y + ", " + z);
+};
+
+// Check if an adjacent array is out-of-bounds
+
+function checkMovements(array) {
+
+        if (array[(x - 1)][y][0] === undefined) {
+            canMoveForward = false;
+        } else {
+            canMoveForward = true;
+        }
+
+        if (array[(x + 1)][y][0] === undefined) {
+            canMoveBackward = false;
+        } else {
+            canMoveBackward = true; 
+        }
+
+        if (array[x][(y - 1)][0] === undefined) {
+            canMoveLeft = false;
+        } else {
+            canMoveLeft = true;
+        }
+
+        if (array[x][(y + 1)][0] === undefined) {
+            canMoveRight = false;
+        } else {
+            canMoveRight = true; 
+        }
+
+};
+
+// These functions are called each time a player calls the navigate() function,
+// so they are bundled together. 
+
+function infoPackage() {
+    showCoordinates();
+    checkMovements(museumArray);
+    addColor(museumArray);
+    showUndefinedCells(museumArray);
+    flipImage();
+    // checkMovements(squareArray);
+    // addColor(squareArray);
+    // showUndefinedCells(squareArray);
+};
+
+$(document).on("keydown", function(event) {
+    
+    console.log("You pressed the " + event.originalEvent.key + " key!");
+
+    if ((event.originalEvent.key === "w") || (event.originalEvent.key === "ArrowUp")) {
+        direction = "forward";
+        navigate(direction);
+    } else if ((event.originalEvent.key === "a") || (event.originalEvent.key === "ArrowLeft")) {
+        direction = "left";
+        navigate(direction);
+        lastFaced = "left";
+        flipImage();
+        } else if ((event.originalEvent.key === "s") || (event.originalEvent.key === "ArrowDown")) {
+        direction = "backward";
+        navigate(direction);
+    } else if ((event.originalEvent.key === "d") || (event.originalEvent.key === "ArrowRight")) {
+        direction = "right";
+        navigate(direction);
+        lastFaced = "right";
+        flipImage();
+    } 
+});
+
+function navigate(direction) {
+
+if (((direction === "forward") && (canMoveForward === false)) || ((direction === "backward") && (canMoveBackward === false)) || ((direction === "left") && (canMoveLeft === false)) || ((direction === "right") && (canMoveRight === false))) {
+    console.log("Not permitted");
+} 
+    if ((direction === "forward") && (canMoveForward === true)) {
+            x--;
+        } else if ((direction === "backward") && (canMoveBackward === true)) {
+            x++;
+        } else if ((direction === "left") && (canMoveLeft === true)) {
+            y--;
+        } else if ((direction === "right") && (canMoveRight === true)) {
+            y++;
+        }  
+infoPackage();
+}; 
+
+</script>
+    
+</body>
+</html>

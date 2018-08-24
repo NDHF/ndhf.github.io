@@ -20,18 +20,6 @@
 
 //This array will attempt to approximate the museum where I work:
 
-var museumArray = [
-
-[ [          ], [          ], [          ], [          ] ],
-[ [          ], [          ], [0, 1, 2, 3], [          ] ],
-[ [          ], [          ], [0, 1, 2, 3], [          ] ],
-[ [          ], [0, 1, 2, 3], [0, 1, 2, 3], [          ] ],
-[ [          ], [0, 1, 2, 3], [0, 1, 2, 3], [          ] ],
-[ [          ], [          ], [0, 1, 2, 3], [          ] ],
-[ [          ], [          ], [          ], [          ] ]
-
-];
-
 var x = 5;
 var y = 2;
 var z = 0;
@@ -54,10 +42,10 @@ function showCoordinates() {
 
 // Check if an adjacent array is out-of-bounds
 
-function checkMovements() {
+function checkMovements(array) {
 
     if (z === 0) {
-        if (museumArray[(x - 1)][y][z] === undefined) {
+        if (array[(x - 1)][y][z] === undefined) {
             buttonStatus("#forwardButton", "off");
             canMoveForward = false;
         } else {
@@ -65,7 +53,7 @@ function checkMovements() {
             canMoveForward = true;
         }
 
-        if (museumArray[(x + 1)][y][z] === undefined) {
+        if (array[(x + 1)][y][z] === undefined) {
             buttonStatus("#backwardButton", "off");
             canMoveBackward = false;
         } else {
@@ -75,7 +63,7 @@ function checkMovements() {
     }
 
     if (z === 1) {
-        if (museumArray[x][(y + 1)][z] === undefined) {
+        if (array[x][(y + 1)][z] === undefined) {
             buttonStatus("#forwardButton", "off");
             canMoveForward = false;
         } else {
@@ -83,7 +71,7 @@ function checkMovements() {
             canMoveForward = true;
         }
 
-        if (museumArray[x][(y - 1)][z] === undefined) {
+        if (array[x][(y - 1)][z] === undefined) {
             buttonStatus("#backwardButton", "off");
             canMoveBackward = false;
         } else {
@@ -93,7 +81,7 @@ function checkMovements() {
     }
 
     if (z === 2) {
-        if (museumArray[(x + 1)][y][z] === undefined) {
+        if (array[(x + 1)][y][z] === undefined) {
             buttonStatus("#forwardButton", "off");
             canMoveForward = false;
         } else {
@@ -101,7 +89,7 @@ function checkMovements() {
             canMoveForward = true;
         }
 
-        if (museumArray[(x - 1)][y][z] === undefined) {
+        if (array[(x - 1)][y][z] === undefined) {
             buttonStatus("#backwardButton", "off");
             canMoveBackward = false;
         } else {
@@ -111,7 +99,7 @@ function checkMovements() {
     }
 
     if (z === 3) {
-        if (museumArray[x][(y - 1)][z] === undefined) {
+        if (array[x][(y - 1)][z] === undefined) {
             buttonStatus("#forwardButton", "off");
             canMoveForward = false;
         } else {
@@ -119,7 +107,7 @@ function checkMovements() {
             canMoveForward = true;
         }
 
-        if (museumArray[x][(y + 1)][z] === undefined) {
+        if (array[x][(y + 1)][z] === undefined) {
             buttonStatus("#backwardButton", "off");
             canMoveBackward = false;
         } else {
@@ -147,7 +135,7 @@ function buttonStatus(button, onOrOff) {
 function infoPackage() {
     navigateAudio();
     showCoordinates();
-    checkMovements();
+    checkMovements(museumArray);
     getLocation();
 };
 
