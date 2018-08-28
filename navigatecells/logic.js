@@ -29,9 +29,6 @@ var direction;
 var canMoveForward;
 var canMoveBackward;
 
-var moveForwardYes = ((direction === "forward") && (canMoveForward === true));
-var moveBackwardYes = ((direction === "backward") && (canMoveBackward === true));
-
 infoPackage();
 
 // GLOBAL VARIABLES AND FUNCTIONS END
@@ -40,85 +37,67 @@ function showCoordinates() {
     console.log(x + "," + y + "," + z);
 };
 
+function movementConditionals(isThereAWall, movementForward, movementBackward) {
+
+    if ((movementForward === undefined) || (isThereAWall === "wall")) {
+        canMoveForward = false;
+    } else {
+        canMoveForward = true;
+    }
+
+    if ((movementBackward === undefined) || (isThereAWall === "wall")) {
+        canMoveBackward = false;
+    } else {
+        canMoveBackward = true; 
+    }
+};
+
 // Check if an adjacent array is out-of-bounds
 
 function checkMovements(array) {
 
-    if (z === 0) {
-        if (array[(x - 1)][y][z] === undefined) {
-            buttonStatus("#forwardButton", "off");
-            canMoveForward = false;
-        } else {
-            buttonStatus("#forwardButton", "on");
-            canMoveForward = true;
-        }
+    var arrayForwardAtZ0 = array[(x - 1)][y][z];
+    var arrayBackwardAtZ0 = array[(x + 1)][y][z];
+    var arrayForwardAtZ1 = array[x][(y + 1)][z];
+    var arrayBackwardAtZ1 = array[x][(y - 1)][z];
+    var arrayForwardAtZ2 = arrayBackwardAtZ0;
+    var arrayBackwardAtZ2 = arrayForwardAtZ0;
+    var arrayForwardAtZ3 = arrayBackwardAtZ1;
+    var arrayBackwardAtZ3 = arrayForwardAtZ1;
 
-        if (array[(x + 1)][y][z] === undefined) {
-            buttonStatus("#backwardButton", "off");
-            canMoveBackward = false;
-        } else {
-            buttonStatus("#backwardButton", "on");
-            canMoveBackward = true; 
+    var isThereAWall = array[x][y][z];
+
+    var forwardBackwardArray = [
+        [arrayForwardAtZ0, arrayBackwardAtZ0],
+        [arrayForwardAtZ1, arrayBackwardAtZ1],
+        [arrayForwardAtZ2, arrayBackwardAtZ2],
+        [arrayForwardAtZ3, arrayBackwardAtZ3]
+    ];
+
+    for (let i = 0; i < 4; i++) {
+        if (z === i) {
+            movementConditionals(isThereAWall, (forwardBackwardArray[i][0]), (forwardBackwardArray[i][1]));
         }
     }
-
-    if (z === 1) {
-        if (array[x][(y + 1)][z] === undefined) {
-            buttonStatus("#forwardButton", "off");
-            canMoveForward = false;
-        } else {
-            buttonStatus("#forwardButton", "on");
-            canMoveForward = true;
-        }
-
-        if (array[x][(y - 1)][z] === undefined) {
-            buttonStatus("#backwardButton", "off");
-            canMoveBackward = false;
-        } else {
-            buttonStatus("#backwardButton", "on");
-            canMoveBackward = true;
-        }
-    }
-
-    if (z === 2) {
-        if (array[(x + 1)][y][z] === undefined) {
-            buttonStatus("#forwardButton", "off");
-            canMoveForward = false;
-        } else {
-            buttonStatus("#forwardButton", "on");
-            canMoveForward = true;
-        }
-
-        if (array[(x - 1)][y][z] === undefined) {
-            buttonStatus("#backwardButton", "off");
-            canMoveBackward = false;
-        } else {
-            buttonStatus("#backwardButton", "on");
-            canMoveBackward = true;
-        }
-    }
-
-    if (z === 3) {
-        if (array[x][(y - 1)][z] === undefined) {
-            buttonStatus("#forwardButton", "off");
-            canMoveForward = false;
-        } else {
-            buttonStatus("#forwardButton", "on");
-            canMoveForward = true;
-        }
-
-        if (array[x][(y + 1)][z] === undefined) {
-            buttonStatus("#backwardButton", "off");
-            canMoveBackward = false;
-        } else {
-            buttonStatus("#backwardButton", "on");
-            canMoveBackward = true;
-        }
-    }
+    changeButtons();
 };
 
 // Provide visual cues to user for whether they can or can't move in a certain direction
 // Here, the visual cue is a grayed-out button
+
+function changeButtons() {
+    if (canMoveForward === false) {
+        buttonStatus("#forwardButton", "off");
+    } else if (canMoveForward === true) {
+        buttonStatus("#forwardButton", "on");
+    }
+
+    if (canMoveBackward === false) {
+        buttonStatus("#backwardButton", "off");
+    } else if (canMoveBackward === true) {
+        buttonStatus("#backwardButton", "on");
+    }
+}
 
 function buttonStatus(button, onOrOff) {
 
