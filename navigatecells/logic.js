@@ -144,20 +144,39 @@ $(document).on("keydown", function (event) {
 
     console.log("You pressed the " + event.originalEvent.key + " key!");
 
-    if ((event.originalEvent.key === "w") || (event.originalEvent.key === "ArrowUp")) {
-        direction = "forward";
-        navigate(direction);
-    } else if ((event.originalEvent.key === "a") || (event.originalEvent.key === "ArrowLeft")) {
-        direction = "ccw";
-        navigate(direction);
-    } else if ((event.originalEvent.key === "s") || (event.originalEvent.key === "ArrowDown")) {
-        direction = "backward";
-        navigate(direction);
-    } else if ((event.originalEvent.key === "d") || (event.originalEvent.key === "ArrowRight")) {
-        direction = "cw";
-        navigate(direction);
-    }
+    if (isFunctionRunning === true) {
+        console.log("Hold your horses");
+    } else if (isFunctionRunning === false) {
+        if ((event.originalEvent.key === "w") || (event.originalEvent.key === "ArrowUp")) {
+            direction = "forward";
+            navigate(direction);
+        } else if ((event.originalEvent.key === "a") || (event.originalEvent.key === "ArrowLeft")) {
+            direction = "ccw";
+            navigate(direction);
+        } else if ((event.originalEvent.key === "s") || (event.originalEvent.key === "ArrowDown")) {
+            direction = "backward";
+            navigate(direction);
+        } else if ((event.originalEvent.key === "d") || (event.originalEvent.key === "ArrowRight")) {
+            direction = "cw";
+            navigate(direction);
+        }
+    }   
 });
+
+var footstepsLength;
+
+var isFunctionRunning = false;
+
+function disableMovement(time) {
+    console.log("Disable Movement was called");
+    isFunctionRunning = true;
+    setTimeout(enableMovement, time);
+}
+
+function enableMovement() {
+    console.log("enableMovement was called");
+    isFunctionRunning = false;
+}
 
 function navigateAudio() {
 
@@ -166,13 +185,26 @@ function navigateAudio() {
     var littleFootsteps = new Audio();
     littleFootsteps.src = "audio/footsteps/littleFootsteps.mp3";
 
+    footsteps.addEventListener('loadedmetadata', function() {
+        footstepsLength = (footsteps.duration * 1000);
+        console.log(footstepsLength);
+    });
+
+    littleFootsteps.addEventListener('loadedmetadata', function() {
+        littleFootstepsLength = (littleFootsteps.duration * 1000);
+        console.log(littleFootstepsLength);
+    });
+
 
     if (((direction === "forward") && (canMoveForward === true)) || ((direction === "backward") && (canMoveBackward === true))) {
         console.log("footsteps");
+        disableMovement(footstepsLength);
         footsteps.play();
     } else if ((direction === "ccw") || (direction === "cw")) {
         console.log("little footsteps");
+        disableMovement(littleFootstepsLength);
         littleFootsteps.play();
+        console.log(littleFootsteps.duration);
     } else {
         console.log("no footsteps");
     }
@@ -249,3 +281,29 @@ function getLocation(array) {
         }
     }
 };
+
+function createPopUpDiv() {
+    var popUpDiv = $("<div>");
+    popUpDiv.attr("id", "popUpDiv");
+    var closeButton = $("<div>");
+    closeButton.attr("id", "closeButtonDiv");
+    closeButton.html("x");
+    closeButton.appendTo(popUpDiv);
+    popUpDiv.appendTo($("#imageContainer"));
+    popUpDiv.css({ opacity: 0 });
+}
+createPopUpDiv();
+
+$(document).ready(function() {
+    $("#picture").click(function(event) {
+        $("#popUpDiv").css({ opacity: 1 });
+    });
+});
+
+$(document).ready(function() {
+    $("#closeButtonDiv").click(function(event) {
+        console.log("I was clicked!");
+        $("#popUpDiv").css({ opacity: 0 });
+    });
+})
+
