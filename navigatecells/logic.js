@@ -166,6 +166,7 @@ function navigateAudio() {
     var littleFootsteps = new Audio();
     littleFootsteps.src = "audio/footsteps/littleFootsteps.mp3";
 
+
     if (((direction === "forward") && (canMoveForward === true)) || ((direction === "backward") && (canMoveBackward === true))) {
         console.log("footsteps");
         footsteps.play();
@@ -235,12 +236,8 @@ function navigate(direction) {
 function getLocation(array) {
     for (let i = 0; i < array.length; i++) {
         if (x === i) {
-            console.log(array[x]);
             for (let j = 0; j < array[i].length; j++) {
                 if (y === j) {
-                    console.log(array[x][y]);
-                    console.log(array[x][y].zArray);
-                    console.log(array[x][y].zArray.length);
                     $("p#xyCoordinateText").html(array[x][y].RoomText);
                     for (let k = 0; k < array[i][j].zArray.length; k++) {
                         if (z === k) {
