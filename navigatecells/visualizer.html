@@ -2,12 +2,11 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Navigate-Cells Visualizer</title>
     <!-- jQuery -->
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <!-- Icon -->
+    <link rel="icon" type="image/png" href="bearicon.png">
     <style>
         td {
             background-color: white;
@@ -19,7 +18,7 @@
             margin-left: auto;
             margin-right: auto;
             border: 1px solid black;
-            background-image: url("grass.jpg");
+            background-image: url("cobblestone.jpg");
         }
 
         img {
@@ -27,18 +26,28 @@
             height: 90px;
         }
     </style>
-    <!-- Icon -->
-    <link rel="icon" 
-      type="image/png" 
-      href="bearicon.png">
 </head>
 
 <body>
 
-    <div id="mapContainer">
+    <div id="mapContainer"></div>
 
-    </div>
+    <p id="demo"></p>
+    <p id="oldX"></p>
+    <p id="oldY"></p>
+    <p id="newX"></p>
+    <p id="newY"></p>
+    <p id="distanceFromImageXCenter"></p>
+    <p id="distanceFromImageYCenter"></p>
 
+    <p><b>The avatar will face toward the cursor if the cursor is within 200px.</b></p>
+    <p><b>Use the 'k' and 'l' keys to rotate the avatar with the keyboard.</b></p>
+
+    <p class="attribution">"Animated Rogue by Calciumtrice, usable under <a href="https://creativecommons.org/licenses/by/3.0/">Creative
+            Commons Attribution 3.0 license</a>."</p>
+    <p class="attribution">Source: <a href="https://opengameart.org/content/animated-rogue-extra">https://opengameart.org/content/animated-rogue-extra</a></p>
+
+    <p class="attribution"><a href="https://www.freepik.com/free-photos-vectors/background">Background image created by Kues1 - Freepik.com</a></p>
 
     <script>
         //         var squareArray = [
@@ -111,8 +120,6 @@
         var moveForwardYes = ((direction === "forward") && (canMoveForward === true));
         var moveBackwardYes = ((direction === "backward") && (canMoveBackward === true));
 
-        infoPackage();
-
         // GLOBAL VARIABLES AND FUNCTIONS END
 
         //This function will draw an HTML table of the same dimensions as the array. The CSS file defines the styling of each cell.
@@ -153,7 +160,7 @@
             }
         }
 
-        var lastFaced;
+        var lastFaced = "down";
 
         function addColor(array) {
             $("td").html("");
@@ -162,29 +169,47 @@
             $("#x" + x + "y" + y).css("opacity", "1");
             $("#x" + x + "y" + y).css("background-color", "rgba(0, 0, 128, 0)");
             var image = $("<img>");
-            image.attr("src", "samoyed.png");
+            // image.attr("src", "samoyed.png");
+            image.attr("id", "rotatingImage");
+            image.addClass(lastFaced);
+            // image.attr("src", "avatar-image/down.png");
             $("#x" + x + "y" + y).html(image);
         };
 
-        function flipImage(whichWay) {
-            if (lastFaced === "right") {
-                $("img").css("transform", "scaleX(-1)");
+        function flipImage() {
+            // if (lastFaced === undefined) {
+            //     $("#rotatingImage").attr("src", "avatar-image/down.png");
+            //     $("#rotatingImage").addClass("down");
+            if (lastFaced === "up") {
+                // $("img").css("transform", "scaleX(-1)");
+                $("#rotatingImage").attr("src", "avatar-image/up.png");
+            } else if (lastFaced === "right") {
+                // $("img").css("transform", "scaleX(1)");
+                $("#rotatingImage").attr("src", "avatar-image/right.png");
+            } else if (lastFaced === "down") {
+                $("#rotatingImage").attr("src", "avatar-image/down.png");
             } else if (lastFaced === "left") {
-                $("img").css("transform", "scaleX(1)");
+                $("#rotatingImage").attr("src", "avatar-image/left.png");
             }
         };
 
-        mapGenerator(museumArray);
+        function launcher(array) {
+            mapGenerator(array);
+            addColor(array);
+            showUndefinedCells(array);
+            flipImage();
+            infoPackage(array);
+        };
 
-        addColor(museumArray);
+        function infoPackage(array) {
+            showCoordinates();
+            checkMovements(array);
+            addColor(array);
+            showUndefinedCells(array);
+            flipImage();
+        };
 
-        showUndefinedCells(museumArray);
-
-        // mapGenerator(squareArray);
-
-        // addColor(squareArray);
-
-        // showUndefinedCells(squareArray);
+        launcher(museumArray);
 
         function showCoordinates() {
             console.log(x + ", " + y + ", " + z);
@@ -223,17 +248,6 @@
         // These functions are called each time a player calls the navigate() function,
         // so they are bundled together. 
 
-        function infoPackage() {
-            showCoordinates();
-            checkMovements(museumArray);
-            addColor(museumArray);
-            showUndefinedCells(museumArray);
-            flipImage();
-            // checkMovements(squareArray);
-            // addColor(squareArray);
-            // showUndefinedCells(squareArray);
-        };
-
         var isFunctionRunning = false;
 
         function disableMovement() {
@@ -260,16 +274,16 @@
                 } else if ((event.originalEvent.key === "a") || (event.originalEvent.key === "ArrowLeft")) {
                     direction = "left";
                     navigate(direction);
-                    lastFaced = "left";
-                    flipImage();
+                    // lastFaced = "left";
+                    // flipImage();
                 } else if ((event.originalEvent.key === "s") || (event.originalEvent.key === "ArrowDown")) {
                     direction = "backward";
                     navigate(direction);
                 } else if ((event.originalEvent.key === "d") || (event.originalEvent.key === "ArrowRight")) {
                     direction = "right";
                     navigate(direction);
-                    lastFaced = "right";
-                    flipImage();
+                    // lastFaced = "right";
+                    // flipImage();
                 }
                 disableMovement();
             }
@@ -292,8 +306,120 @@
             } else if ((direction === "right") && (canMoveRight === true)) {
                 y++;
             }
-            infoPackage();
+            infoPackage(museumArray);
         };
+
+        // rotateWithMouse FUNCTIONS
+
+        function myFunction(event) {
+            let x = event.clientX;
+            let y = event.clientY;
+            document.getElementById("newX").innerHTML = "x = " + x;
+            document.getElementById("newY").innerHTML = "y = " + y;
+
+            let imageHeight = document.getElementById("rotatingImage").offsetHeight;
+            let imageWidth = document.getElementById("rotatingImage").offsetWidth;
+            let imageTop = document.getElementById("rotatingImage").offsetTop;
+            let imageLeft = document.getElementById("rotatingImage").offsetLeft;
+
+            let imageXCenter = (imageLeft + (imageWidth / 2));
+            let imageYCenter = (imageTop + (imageHeight / 2));
+
+            let distanceFromImageXCenter = (x - imageXCenter);
+            let distanceFromImageYCenter = (y - imageYCenter);
+            document.getElementById("distanceFromImageXCenter").innerHTML = "distanceFromImageXCenter: " +
+                distanceFromImageXCenter;
+            document.getElementById("distanceFromImageYCenter").innerHTML = "distanceFromImageYCenter: " +
+                distanceFromImageYCenter;
+
+            if ((distanceFromImageXCenter < 200) && (distanceFromImageYCenter < 200)) {
+                if ((distanceFromImageYCenter < 0) && (Math.abs(distanceFromImageXCenter) > distanceFromImageYCenter)) {
+                    console.log("UP");
+                    rotateFunction("up");
+                } else if ((distanceFromImageYCenter > 0) && (Math.abs(distanceFromImageXCenter) <
+                        distanceFromImageYCenter)) {
+                    console.log("DOWN");
+                    rotateFunction("down");
+                } else if ((distanceFromImageXCenter > 0) && (Math.abs(distanceFromImageYCenter) <
+                        distanceFromImageXCenter)) {
+                    console.log("RIGHT");
+                    rotateFunction("right");
+                } else if ((distanceFromImageXCenter < 0) && (Math.abs(distanceFromImageYCenter) >
+                        distanceFromImageXCenter)) {
+                    console.log("LEFT");
+                    rotateFunction("left");
+                }
+            }
+        };
+
+        function clearCoor() {
+            document.getElementById("demo").innerHTML = "";
+        };
+
+        // This function will allow game sprite to be rotated with "l" and "k" buttons
+
+        document.addEventListener("keydown", function (event) {
+
+            console.log("You pressed the " + event.key + " key!");
+
+            if (event.key === "l") {
+                rotateWithKeyboard("keyboardRight");
+            } else if (event.key === "k") {
+                rotateWithKeyboard("keyboardLeft");
+            }
+        });
+
+        function rotateFunction(newDirection) {
+            console.log("rotateFunction, lastFaced: " + lastFaced);
+            let avatarDirections = ["up", "right", "down", "left"];
+
+            if (avatarDirections.includes(newDirection) === false) {
+                console.error("rotateFunction argument was not 'up', 'down', 'left' or 'right'. Input was " +
+                    newDirection);
+
+            } else {
+                document.getElementById("rotatingImage").className = "";
+                document.getElementById("rotatingImage").classList.add(newDirection);
+                document.getElementById("rotatingImage").src = "avatar-image/" + newDirection + ".png";
+                lastFaced = newDirection;
+            }
+        };
+
+        function rotateWithKeyboard(keyboardDirection) {
+
+            let currentClass = document.getElementById("rotatingImage").classList.item(0);
+
+            document.getElementById("rotatingImage").classList.remove(currentClass);
+
+            let avatarDirections = ["up", "right", "down", "left"];
+
+            let indexOfCurrentClass = avatarDirections.indexOf(currentClass);
+
+            if (indexOfCurrentClass === -1) {
+                console.error("WARNING: currentClass is null, indexOfCurrentClass is -1. Will be set to 'down'");
+                indexOfCurrentClass = 2;
+            }
+
+            if (keyboardDirection === "keyboardRight") {
+                if (indexOfCurrentClass === 3) {
+                    indexOfCurrentClass = 0;
+                } else {
+                    indexOfCurrentClass++;
+                }
+            }
+
+            if (keyboardDirection === "keyboardLeft") {
+                if (indexOfCurrentClass === 0) {
+                    indexOfCurrentClass = 3;
+                } else {
+                    indexOfCurrentClass--;
+                }
+            }
+            rotateFunction(avatarDirections[indexOfCurrentClass]);
+        };
+
+        document.addEventListener("mousemove", myFunction);
+        document.addEventListener("mouseout", clearCoor);
     </script>
 
 </body>
