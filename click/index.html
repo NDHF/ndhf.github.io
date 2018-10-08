@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Clicky Game with React</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <!-- <link rel="icon" type="image/png" href="maiden"> -->
+    <style>
+        img {
+            padding: 10px;
+        }
+        #container {
+            margin-left: auto;
+            margin-right: auto;
+            width: 90%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="container"></div>
+
+    <script type="text/babel">
+        // class HelloWorld extends React.Component {
+    //     render() {
+    //         console.log(this.props.greetTarget);
+    //         return <p>Hello {this.props.greetTarget}!</p>
+    //     }
+    // }
+
+    var albums = [
+    "assets/images/pieceofmind.jpg", 
+        "assets/images/numberofthebeast.jpg", 
+        "assets/images/powerslave.jpg", 
+        "assets/images/killers.jpg", 
+        "assets/images/seventhsonofaseventhson.jpg", 
+        "assets/images/finalfrontier.jpg",
+        "assets/images/fearofthedark.jpg",
+        "assets/images/danceofdeath.jpg",
+        "assets/images/bravenewworld.jpg", 
+        "assets/images/bookofsouls.png", 
+        "assets/images/matteroflifeanddeath.jpg",
+        "assets/images/ironmaiden.jpg",
+        "assets/images/somewhereintime.jpg",
+        "assets/images/realliveone.jpg",
+        "assets/images/realdeadone.jpg",
+        "assets/images/liveafterdeath.jpg",
+        "assets/images/maidenjapan.jpg"
+        ];
+
+    function shuffle(array) {
+        let copyOfArray = array.slice(0);
+        let shuffledArray = [];
+        while (copyOfArray.length > 0) {
+            let randomNumber = Math.floor(Math.random() * copyOfArray.length)
+            shuffledArray.push(copyOfArray[randomNumber]);
+            copyOfArray.splice(randomNumber, 1);
+        } 
+        return shuffledArray;
+    }
+
+    class Page extends React.Component {
+        constructor(props) {
+            super(props);
+
+            this.state = {
+                correctGuesses: 0, 
+                incorrectGuesses: 0,
+                albums: this.props.albums
+            };
+        }
+
+    // The next step would be a way of affecting the correct and incorrect guess counters
+    // independently. This would, in part, involve passing the information on which image was clicked, 
+    // into the shuffle function. By keeping track of which have been clicked already, new clicks can
+    // be compared to an array of old ones. 
+
+        render() {
+            return (
+                <div>
+            <p>Correct Guesses: {this.state.correctGuesses}</p>
+            <p>Incorrect Guesses: {this.state.incorrectGuesses}</p>
+             <Grid albums={this.state.albums} shuffleAlbums={this.shuffleAlbums}/>
+            </div>
+            ) 
+        }
+
+        shuffleAlbums = () => {
+            console.log("googly-moogly")
+            this.setState({
+                albums: shuffle(this.state.albums),
+                correctGuesses: this.state.correctGuesses + 1,
+                incorrectGuesses: this.state.incorrectGuesses + 1
+            });
+            this.render();
+        }
+    }
+
+    class Grid extends React.Component {
+        
+        render() {
+            var rows = [];
+            for (var i = 0; i < albums.length; i++) {
+            // note: we add a key prop here to allow react to uniquely identify each
+            // element in this array. see: https://reactjs.org/docs/lists-and-keys.html
+            rows.push(<img width="300" height="300" onClick={this.props.shuffleAlbums} src={this.props.albums[i]}/>);
+            }
+                return <div>{rows}</div>
+            }
+    }
+
+    ReactDOM.render(
+    <div>
+        <Page albums={shuffle(albums)} />
+    </div>,
+            document.querySelector("#container")
+    );
+    </script>
+
+
+</body>
+
+</html>
