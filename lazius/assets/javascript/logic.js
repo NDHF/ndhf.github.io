@@ -1,64 +1,7 @@
 // LAZIUS (LOT-ZEE-US), AN INVENTORY PROGRAM
 // Lazius allows a user to manipulate an inventory using a browser interface. 
 
-// This is a dummy inventory with objects already inside, for use while designing the program. 
-var inventory = [{
-        Title: "Moby-Dick",
-        Author: "Melville, Herman",
-        Subject: "Fiction",
-        SubSubject: "Classics",
-        Location: "Closet Bookshelf",
-        Quantity: 1,
-        ID: 1
-    },
-    {
-        Title: "Desperation",
-        Author: "King, Stephen",
-        Subject: "Fiction",
-        SubSubject: "Horror Fiction",
-        Location: "Main Bookshelf",
-        Quantity: 1,
-        ID: 2
-    },
-    {
-        Title: "Tale of Despereaux, The",
-        Author: "DiCamillo, Kate",
-        Subject: "Fiction",
-        SubSubject: "Children's Fiction",
-        Location: "Main Bookshelf",
-        Quantity: 2,
-        ID: 3
-    },
-    {
-        Title: "Zen and the Art of Motorcycle Maintenance",
-        Author: "Pirsig, Robert M.",
-        Subject: "Philosophy",
-        SubSubject: "Metaphysics of Quality",
-        Location: "Main Bookshelf",
-        Quantity: 1,
-        ID: 4
-    }
-];
-
-// var inventory = [];
-
-var itemSearchPrompts = [
-    "What parameter would you like to use?",
-    "What is the value of that parameter?",
-    "Is there a second parameter you would like to use?",
-    "What is the value of that parameter?"
-];
-
-var editQuantityPromptArray = [
-    "Enter item ID:",
-    "Would you like to add or deduct?",
-    "By how many?",
-    "Entrant's Initials",
-];
-
-var add;
-
-var searchInputArray = [];
+// GLOBAL VARIABLES START
 
 // Any parameters may be used here.
 // The logic for adding items requires that the last user input be a three-letter inital.
@@ -69,7 +12,17 @@ var itemParameters = ["Title", "Author", "Subject", "SubSubject", "Location", "Q
 
 var itemPropertyInput = [];
 
+var add;
+
+var searchInputArray = [];
+
 var counter;
+
+var inventoryObject;
+
+var indexToBeEdited;
+
+// GLOBAL VARIABLES END
 
 programStart();
 
@@ -112,8 +65,10 @@ function createResultsTableDiv() {
     resultsTable.attr("id", "resultsTable");
     var resultsTableHeaderRow = $("<tr>");
     resultsTableHeaderRow.attr("id", "resultsTableHeaderRow");
+    var resultsTableCaption = $("<caption>");
+    resultsTableCaption.text("Your last entry:");
+    resultsTableCaption.hide();
     for (var i = 0; i < itemParameters.length; i++) {
-        console.log(itemParameters[i]);
         var resultsTableHeader = $("<th>");
         resultsTableHeader.html(itemParameters[i]);
         resultsTableHeaderRow.append(resultsTableHeader);
@@ -129,6 +84,10 @@ function createInputDivs() {
     createInputDiv("addInputDiv", "addInputDivPrompt", "", "addInputDivInput");
     createInputDiv("searchInputDiv", "searchInputDivPrompt", "", "searchInputDivInput");
     createInputDiv("editQuantityDiv", "editQuantityDivPrompt", "", "editQuantityDivInput");
+    createInputDiv("uploadInputDiv", "uploadInputDivPrompt", "", "uploadInputDivInput");
+    createInputDiv("printInputDiv", "printInputDivPrompt", "", "printInputDivInput");
+    createInputDiv("createNewInventoryDiv", "createNewInventoryPrompt", "", "createNewInventoryInput");
+    createInputDiv("noInventoryErrorCatchDiv", "noInventoryErrorCatchDivPrompt", "", "noInventoryErrorCatchDivInput");
 };
 
 function programStart() {
@@ -136,6 +95,7 @@ function programStart() {
     runAFunction("div#menuInputDiv");
     createResultsTableDiv();
     createParametersList();
+    createTextAreaDiv();
 };
 
 function runAFunction(divToShow, functionToRun) {
@@ -151,7 +111,7 @@ function runAFunction(divToShow, functionToRun) {
 };
 
 function quitToMenuLogic() {
-    if ($("div.inputDiv:visible input").val() === "quit") {
+    if (($("div.inputDiv:visible input").val() === "quit")) {
         resetValues();
         runAFunction("div#menuInputDiv");
         $("div.inputDiv:visible input").select();
@@ -161,7 +121,13 @@ function quitToMenuLogic() {
 $(document).on("keydown", function (event) {
     if (event.originalEvent.key === "Enter") {
         quitToMenuLogic();
-        if (($("div#menuInputDiv").is(":visible") && ($("input#menuInputDivInput").val() === "add")) || ($("div#addInputDiv").is(":visible") && ($("input#addInputDivInput").val() !== "undo") && ($("input#addInputDivInput").val() !== "quit"))) {
+        if (((inventoryObject === undefined) &&
+                (($("div.inputDiv:visible input").val() === "add") ||
+                    ($("div.inputDiv:visible input").val() === "edit") ||
+                    ($("div.inputDiv:visible input").val() === "print") ||
+                    ($("div.inputDiv:visible input").val() === "search"))) || ($("div#noInventoryErrorCatchDiv").is(":visible"))) {
+            runAFunction("div#noInventoryErrorCatchDiv", noInventoryErrorCatch);
+        } else if (($("div#menuInputDiv").is(":visible") && ($("input#menuInputDivInput").val() === "add")) || ($("div#addInputDiv").is(":visible") && ($("input#addInputDivInput").val() !== "undo") && ($("input#addInputDivInput").val() !== "quit"))) {
             runAFunction("div#addInputDiv", getInformation);
         } else if ($("div.inputDiv:visible input").val() === "undo") {
             if ($("div#addInputDiv").is(":visible")) {
@@ -173,6 +139,12 @@ $(document).on("keydown", function (event) {
             runAFunction("div#searchInputDiv", searchInventory);
         } else if (($("div#menuInputDiv").is(":visible") && ($("input#menuInputDivInput").val() === "edit")) || ($("div#editQuantityDiv").is(":visible") && ($("input#editQuantityDivInput").val() !== "quit"))) {
             runAFunction("div#editQuantityDiv", editQuantity);
+        } else if ($("div#menuInputDiv").is(":visible") && ($("input#menuInputDivInput").val() === "print") || $("div#printInputDiv").is(":visible")) {
+            runAFunction("div#printInputDiv", printInventory);
+        } else if ($("div#menuInputDiv").is(":visible") && ($("input#menuInputDivInput").val() === "upload") || ($("div#uploadInputDiv").is(":visible"))) {
+            runAFunction($("div#uploadInputDiv", uploadInventory))
+        } else if ($("div#menuInputDiv").is(":visible") && ($("input#menuInputDivInput").val() === "newinv") || ($("div#createNewInventoryDiv").is(":visible"))) {
+            runAFunction($("div#createNewInventoryDiv", createNewInventory))
         } else if ($("div#menuInputDiv").is(":visible") && ($("input#menuInputDivInput").val() === "param")) {
             $("input.activeTextInput").val("");
             $("div#parametersDiv").show();
@@ -193,6 +165,7 @@ function resetValues() {
     $("input.activeTextInput").removeAttr("maxlength");
     $("input.activeTextInput").val("");
     $("div#parametersDiv").hide();
+    // $("div#resultsTableDiv").hide();
     counter = undefined;
     add = undefined;
     itemPropertyInput = [];
@@ -202,13 +175,18 @@ function resetValues() {
 };
 
 function searchInventory() {
+    var itemSearchPrompts = [
+        "What parameter would you like to use?",
+        "What is the value of that parameter?",
+        "Is there a second parameter you would like to use?",
+        "What is the value of that parameter?"
+    ];
     $("div#parametersDiv").show();
     $("div#resultsTableDiv").hide();
     $("p#searchResultsString").hide();
     $("input#searchInputDivInput").prop('disabled', false);
     var searchResults = [];
     console.log("The searchInventory function was called!");
-    console.log(itemSearchPrompts.length);
     counterLogic();
     console.log("Counter: " + counter);
     $("p#searchInputDivPrompt").html(itemSearchPrompts[counter]);
@@ -220,22 +198,21 @@ function searchInventory() {
         searchInputArray.push($("input#searchInputDivInput").val());
     }
     $("input#searchInputDivInput").val("");
-    console.log(searchInputArray);
-    console.log(searchInputArray[counter]);
     if (counter === itemSearchPrompts.length) {
+        console.log(inventoryObject.inventory);
         $("p#searchInputDivPrompt").html("Hit 'Enter' to search again.");
         $("input#searchInputDivInput").prop('disabled', true);
         if (searchInputArray[0] === "") {
             searchInputArray.shift();
         }
-        for (var i = 0; i < inventory.length; i++) {
+        for (var i = 0; i < inventoryObject.inventory.length; i++) {
             if (searchInputArray[2] !== "no") {
-                if ((inventory[i][searchInputArray[0]] === searchInputArray[1]) && (inventory[i][searchInputArray[2]] === searchInputArray[3])) {
+                if ((inventoryObject.inventory[i][searchInputArray[0]] === searchInputArray[1]) && (inventoryObject.inventory[i][searchInputArray[2]] === searchInputArray[3])) {
                     searchResults.push(inventory[i]);
                 }
             } else if (searchInputArray[2] === "no") {
-                if (inventory[i][searchInputArray[0]] === searchInputArray[1]) {
-                    searchResults.push(inventory[i]);
+                if (inventoryObject.inventory[i][searchInputArray[0]] === searchInputArray[1]) {
+                    searchResults.push(inventoryObject.inventory[i]);
                 }
             }
         }
@@ -264,19 +241,20 @@ function numberOfResults(number) {
 };
 
 function getInformation() {
+    clearResultsTable();
+    $("input#addInputDivInput").prop("disabled", false);
+    $("div#resultsTableDiv").hide();
     console.log("getInformation was called!");
-    console.log(itemParameters.length);
     counterLogic();
-    console.log(counter);
     $("p#addInputDivPrompt").html(itemParameters[counter] + ": ");
     itemPropertyInput.push($("input#addInputDivInput").val());
     $("input#addInputDivInput").val("");
-    console.log(itemPropertyInput);
-    console.log(itemPropertyInput[counter]);
     if (itemParameters[counter] === "Initials") {
         $("input#addInputDivInput").attr("maxlength", "3");
     }
     if (counter === itemParameters.length - 1) {
+        $("input#addInputDivInput").prop("disabled", true);
+        $("p#addInputDivPrompt").html("Hit 'Enter' to add new item");
         addToInventory();
     }
 };
@@ -285,7 +263,6 @@ function undo(inputID, inputArray, promptID, promptArray) {
     console.log("undo was called");
     $(inputID).val("");
     inputArray.pop();
-    console.log(inputArray);
     if ((counter - 1) >= 0) {
         counter = (counter - 1);
     } else if ((counter - 1) < 0) {
@@ -297,6 +274,7 @@ function undo(inputID, inputArray, promptID, promptArray) {
 
 function displaySearchResults(array) {
     $("div#resultsTableDiv").show();
+    $("table#resultsTable caption").hide();
     for (var i = 0; i < array.length; i++) {
         var tableRow = $("<tr>");
         for (var j = 0; j < itemParameters.length; j++) {
@@ -326,7 +304,7 @@ function addToInventory() {
     book.Quantity = parseInt(book.Quantity);
     var d = new Date;
     book.DateStamp = d;
-    book.ID = parseInt(inventory.length + 1);
+    book.ID = parseInt(inventoryObject.inventory.length + 1);
     book.QuantityChanges = [];
     book.QuantityChanges[0] = {
         NewQuantity: book.Quantity,
@@ -334,16 +312,21 @@ function addToInventory() {
         Initials: book.Initials,
         DateStamp: book.DateStamp
     }
-    inventory.push(book);
-    console.log(inventory);
+    inventoryObject.inventory.push(book);
+    // dataRef.ref().push(book);
+    console.log(inventoryObject.inventory);
+    displaySearchResults([inventoryObject.inventory[inventoryObject.inventory.length - 1]]);
     resetValues();
-    getInformation();
 };
-
-var indexToBeEdited;
 
 function editQuantity() {
     var editQuantityInputValue = $("input#editQuantityDivInput").val();
+    var editQuantityPromptArray = [
+        "Enter item ID:",
+        "Would you like to add or deduct?",
+        "By how many?",
+        "Entrant's Initials",
+    ];
     var editQuantityMessages = {
         pleaseAddOrDeduct: "Please enter 'add' or 'deduct",
         enterDifferentValue: "Please enter a different value",
@@ -357,16 +340,13 @@ function editQuantity() {
     counterLogic();
     console.log("counter: " + counter);
     $("p#editQuantityDivPrompt").html(editQuantityPromptArray[counter]);
-    if (counter === 0) {
-        // $("div#resultsTableDiv").hide();
-    } else if (counter === 1) {
-        for (var i = 0; i < inventory.length; i++) {
-            if (inventory[i].ID === parseInt(editQuantityInputValue)) {
+    if (counter === 0) {} else if (counter === 1) {
+        for (var i = 0; i < inventoryObject.inventory.length; i++) {
+            if (inventoryObject.inventory[i].ID === parseInt(editQuantityInputValue)) {
                 indexToBeEdited = i;
-                console.log(indexToBeEdited);
             }
         }
-        displaySearchResults([inventory[indexToBeEdited]]);
+        displaySearchResults([inventoryObject.inventory[indexToBeEdited]]);
     } else if (counter === 2) {
         if ((editQuantityInputValue !== "add") && (editQuantityInputValue !== "deduct")) {
             counter--;
@@ -376,39 +356,134 @@ function editQuantity() {
         } else if (editQuantityInputValue === "deduct") {
             add = false;
         }
-        displaySearchResults([inventory[indexToBeEdited]]);
+        displaySearchResults([inventoryObject.inventory[indexToBeEdited]]);
     } else if (counter === 3) {
         $("input#editQuantityDivInput").attr("maxlength", "3");
         var inputIsNotANumber = (isNaN(parseInt(editQuantityInputValue)));
         var inputIsNegative = (parseInt(editQuantityInputValue) < 0);
         var itWouldDeductAnImpossibleAmount = (add === false &&
-            (inventory[indexToBeEdited].Quantity - parseInt(editQuantityInputValue) < 0));
+            (inventoryObject.inventory[indexToBeEdited].Quantity - parseInt(editQuantityInputValue) < 0));
         if (inputIsNotANumber || inputIsNegative || itWouldDeductAnImpossibleAmount) {
             counter--;
-            console.log(counter);
-            console.log(editQuantityMessages.enterDifferentValue);
             $("p#editQuantityDivPrompt").html(editQuantityMessages.enterDifferentValue);
-            displaySearchResults([inventory[indexToBeEdited]]);
+            displaySearchResults([inventoryObject.inventory[indexToBeEdited]]);
         } else {
             if (add === true) {
-                inventory[indexToBeEdited].Quantity = parseInt(parseInt(inventory[indexToBeEdited].Quantity) + parseInt(editQuantityInputValue));
+                inventoryObject.inventory[indexToBeEdited].Quantity = parseInt(parseInt(inventoryObject.inventory[indexToBeEdited].Quantity) + parseInt(editQuantityInputValue));
             } else if (add === false) {
-                inventory[indexToBeEdited].Quantity = parseInt(parseInt(inventory[indexToBeEdited].Quantity) - parseInt(editQuantityInputValue));
+                inventoryObject.inventory[indexToBeEdited].Quantity = parseInt(parseInt(inventoryObject.inventory[indexToBeEdited].Quantity) - parseInt(editQuantityInputValue));
             }
         }
     } else if (counter === 4) {
         var quantityUpdate = {};
         var d = new Date;
-        quantityUpdate.NewQuantity = inventory[indexToBeEdited].Quantity;
-        quantityUpdate.QuantityChange = quantityUpdate.NewQuantity - (inventory[indexToBeEdited].QuantityChanges[inventory[indexToBeEdited].QuantityChanges.length - 1].NewQuantity);
+        quantityUpdate.NewQuantity = inventoryObject.inventory[indexToBeEdited].Quantity;
+        quantityUpdate.QuantityChange = quantityUpdate.NewQuantity - (inventoryObject.inventory[indexToBeEdited].QuantityChanges[inventoryObject.inventory[indexToBeEdited].QuantityChanges.length - 1].NewQuantity);
         quantityUpdate.Initials = editQuantityInputValue;
         quantityUpdate.DateStamp = d;
-        inventory[indexToBeEdited].QuantityChanges.push(quantityUpdate);
-        console.log(indexToBeEdited);
-        displaySearchResults([inventory[indexToBeEdited]]);
+        inventoryObject.inventory[indexToBeEdited].QuantityChanges.push(quantityUpdate);
+        displaySearchResults([inventoryObject.inventory[indexToBeEdited]]);
         $("p#editQuantityDivPrompt").html(editQuantityMessages.hitEnterToSearchAgain);
         $("input#editQuantityDivInput").prop('disabled', true);
         resetValues();
     }
     $("input#editQuantityDivInput").val("");
+};
+
+function createTextAreaDiv() {
+    var textAreaDiv = $("<div>");
+    textAreaDiv.attr("id", "textAreaDiv");
+    var textArea = $("<textarea>");
+    textArea.attr("id", "textArea");
+    textArea.attr("rows", "4");
+    textArea.attr("cols", "50");
+    textAreaDiv.append(textArea);
+    textAreaDiv.insertAfter("div#commandMenuDiv");
+    textAreaDiv.hide();
+};
+
+function createNewInventory() {
+    counterLogic();
+    if (counter === 0) {
+        $("div#createNewInventoryDiv").show();
+        $("p#createNewInventoryPrompt").html("You are creating a new inventory. Type initials and hit 'Enter' to continue.");
+        $("input#createNewInventoryInput").attr("maxlength", "3");
+    } else if (counter === 1) {
+        $("input#createNewInventoryInput").prop("disabled", true);
+        var d = new Date;
+        inventoryObject = {
+            createdBy: $("input#createNewInventoryInput").val(),
+            dateCreated: d,
+            inventory: []
+        }
+        $("input#createNewInventoryInput").val("");
+        $("p#createNewInventoryPrompt").html("Inventory created. Press 'Enter' to continue.");
+    } else if (counter === 2) {
+        resetValues();
+        runAFunction("div#menuInputDiv");
+        $("div.inputDiv:visible input").select();
+    }
+};
+
+function printInventory() {
+    counterLogic();
+    if (counter === 0) {
+        $("div#textAreaDiv").show();
+        $("input#printInputDivInput").prop('disabled', true);
+        console.log(inventoryObject.inventory);
+        $("div#textAreaDiv textarea").val(JSON.stringify(inventoryObject));
+        $("div#textAreaDiv textarea").select();
+        document.execCommand("copy");
+        $("div#textAreaDiv").hide();
+        $("p#printInputDivPrompt").html("Your JSON text has been copied. Please save it to a file. <br> Press 'Enter' to return to menu.");
+    } else if (counter === 1) {
+        resetValues();
+        runAFunction("div#menuInputDiv");
+        $("div.inputDiv:visible input").select();
+    }
+};
+
+function noInventoryErrorCatch() {
+    counterLogic();
+    if (counter === 0) {
+        $("input#noInventoryErrorCatchDivInput").prop("disabled", true);
+        $("p#noInventoryErrorCatchDivPrompt").html("You have not defined an inventory yet. <br> Press 'Enter' to return to menu.");
+    } else if (counter === 1) {
+        resetValues();
+        runAFunction("div#menuInputDiv");
+        $("div.inputDiv:visible input").select();
+    }
+};
+
+function uploadInventory() {
+    counterLogic();
+    console.log(counter);
+    console.log("inventoryObject is undefined: " + (inventoryObject === undefined));
+    if (counter === 0) {
+        if (inventoryObject !== undefined) {
+            $("input#uploadInputDivInput").prop('disabled', true);
+            $("p#uploadInputDivPrompt").html("You are already working with an inventory. <br> Press 'Enter' to return to menu.");
+            counter++;
+        } else if (inventoryObject === undefined) {
+            $("div#textAreaDiv").show();
+            $("input#uploadInputDivInput").prop('disabled', true);
+            $("p#uploadInputDivPrompt").html("Please paste in your JSON text. <br> Press 'Enter' when ready to upload.");
+        }
+    } else if (counter === 1) {
+        if (inventoryObject !== undefined) {
+            resetValues();
+            runAFunction("div#menuInputDiv");
+            $("div.inputDiv:visible input").select();
+        } else if (inventoryObject === undefined) {
+            inventoryObject = JSON.parse($("div#textAreaDiv textarea").val());
+            console.log(inventoryObject.inventory);
+            $("div#textAreaDiv textarea").val("");
+            $("div#textAreaDiv").hide();
+            $("p#uploadInputDivPrompt").html("Inventory uploaded. " + inventoryObject.inventory.length + " items in array. <br> Remember to save when finished. Press 'Enter' to return to menu.");
+        }
+    } else if (counter === 2) {
+        resetValues();
+        runAFunction("div#menuInputDiv");
+        $("div.inputDiv:visible input").select();
+    }
 };
